@@ -1,0 +1,11 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    max-width: 800px;
+    min-width: 400px;
+    margin: 20px auto;
+    font-family: Georgia, sans-serif;
+}
