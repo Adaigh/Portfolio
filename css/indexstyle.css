@@ -5,7 +5,72 @@
 
 body {
     max-width: 800px;
-    min-width: 400px;
+    min-width: 200px;
     margin: 20px auto;
-    font-family: Georgia, sans-serif;
+    padding: 0 20px;
+    font-family: sans-serif;
+    background: linear-gradient(to top left, rgba(100, 0, 0, 0.8) 20%, rgba(255, 255, 255, 1));
+    min-height: 1000px;
+}
+
+header img {
+    height: 150px;
+    border-radius: 50%;
+    border: 2px solid #510;
+    float: left;
+    margin: 0 10px 10px 0;
+}
+
+nav {
+    width: 90%;
+    margin: 20px 0;
+}
+
+nav li {
+    display: inline-block;
+    text-align: center;
+    border: 1px solid rgba(0,0,0,0);
+    padding: 5px;
+    font-size: 12px;
+    border-radius: 5px;
+}
+
+nav li:hover {
+    border: 1px solid rgba(0,0,0,0.5);
+}
+
+nav li:active {
+    border: 1px solid rgba(0,0,0,0.5);
+    background-color: rgba(0,0,0,0.5);
+}
+
+hr {
+    margin: 20px 0;
+}
+
+h1 {
+    font-family: Georgia, serif;
+    color: #510;
+    padding-top: 60px;
+}
+
+h2 {
+    margin: 20px;
+    text-decoration: underline;
+}
+
+a {
+    color: #888;
+}
+
+
+footer {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.6);
+    color: #FFF;
+    font-family: monospace;
+    font-size: 12px;
+    opacity: 0.5;
 }
