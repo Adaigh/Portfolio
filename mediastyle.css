@@ -7,4 +7,50 @@
 	.introduction {
 		margin: 0;
 	}
+
+	.menu-button {
+		display:inline-block;
+	}
+
+	.menu-button.active .bar:nth-child(1){
+		width: 20px;
+		transform: translateY(8px) translateX(6px) rotate(45deg);
+	}
+
+	.menu-button.active .bar:nth-child(2){
+		opacity: 0;
+	}
+
+	.menu-button.active .bar:nth-child(3){
+		width: 20px;
+		transform: translateY(-8px) translateX(-6px) rotate(-45deg);
+	}
+
+	.menu {
+		position: fixed;
+		top: 65px;
+		left: 155px;
+		flex-direction: column;
+		min-width: 100px;
+		background-color: #EEE;
+		gap: 0;
+		visibility: hidden;
+		opacity: 0;
+		transition: 0.5s;
+		border-radius: inherit;
+		padding: 5px;
+	}
+
+	.menu.active {
+		visibility: visible;
+		opacity: 1;
+	}
+
+	.menu-divider{
+		height: 3px;
+		width: 50px;
+	}
+
+	.menu-item {
+	}
 }
