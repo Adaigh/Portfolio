@@ -5,6 +5,11 @@
 
 body {
     margin: 0 50px;
+    background-color: #EEE;
+}
+
+header {
+    margin-bottom: 30px;
 }
 
 .navbar {
@@ -16,15 +21,16 @@ body {
     flex-direction: row;
     margin: 20px;
     border-radius: 15px;
-    background-color: #EEE;
+    background-color: #FFF;
     overflow: hidden;
     top: 0;
-    box-shadow: 0 0 0 5px #FFF;
+    border: 5px solid #FFF;
+    box-shadow: 2px 2px 5px #666;
 }
 
 .page-title {
     min-width: 100px;
-    background-color: #DDD;
+    background-color: #EEE;
     text-align: center;
 }
 
@@ -53,7 +59,7 @@ body {
     display: block;
     height: 25px;
     width: 3px;
-    background-color: #FFF;
+    background-color: #EEE;
 }
 
 .menu-button {
@@ -79,26 +85,27 @@ body {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    box-shadow: 2px 2px 5px #666;
-    padding: 10px;
-    border-radius: 15px;
-    overflow: hidden;
 }
 
 .profile-portrait {
+    padding: 10px;
     display: block;
-    margin: 0 15px;
-    height: 200px;
+    margin: 15px;
+    height: 280px;
     flex-basis: 200px;
     flex-grow: 0;
     flex-shrink: 0;
     overflow: hidden;
-    border-radius: inherit;
+    padding-bottom: 20px;
+    background-color: #FFF;
+    border-radius: 15px;
+    border: 1px solid #AAA;
 }
 
 .profile-portrait img {
+    border-radius: 5px;
     width: 200px;
-    margin-top: -50px;
+    object-fit: cover;
 }
 
 .profile-info {

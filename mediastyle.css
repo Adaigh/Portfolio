@@ -4,6 +4,10 @@
 		flex-direction: column;
 	}
 
+	.profile-portrait {
+		flex-basis: 280px;
+	}
+
 	.introduction {
 		margin: 0;
 	}
