@@ -3,9 +3,13 @@
     padding: 0;
 }
 
+a {
+    color: #800;
+}
 body {
-    margin: 0 50px;
-    background-color: #EEE;
+    background-color: #FFF;
+    font-family: 'Roboto Slab', serif
+
 }
 
 header {
@@ -80,11 +84,13 @@ header {
 }
 
 .profile-banner {
-    margin-top: 77px;
+    padding: 200px 10% 200px 10%;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    background-image: url("./images/plantbg_1.png");
+    background-size: cover;
 }
 
 .profile-portrait {
@@ -99,7 +105,6 @@ header {
     padding-bottom: 20px;
     background-color: #FFF;
     border-radius: 15px;
-    border: 1px solid #AAA;
 }
 
 .profile-portrait img {
@@ -116,29 +121,26 @@ header {
 }
 
 .name-text {
-    font-size: 2.5rem;
-    font-weight: 500;
-    align-self: center;
-}
-
-.title-text {
     font-size: 1.5em;
     font-style: italic;
     font-weight: 700;
     align-self: center;
+    letter-spacing: .5rem;
+    word-spacing: 1rem;
 }
 
-.info-divider {
-    display: block;
-    width: 100%;
-    height: 3px;
-    background-color: #DDD;
+.title-text {
+    font-size: 2.5rem;
+    font-weight: 900;
+    align-self: center;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .introduction {
-    margin: 0 5%;
-    text-align: justify;
+    padding: 0 5%;
+    text-align: center;
     text-justify: inter-character;
+    font-weight: 600;
 }
 
 footer {
