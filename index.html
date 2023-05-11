@@ -17,9 +17,9 @@
                 <span class="page-title-text">XJD.</span>
             </div>
             <ul class="menu">
-                <li class="menu-item">Applications</li>
-                <span class="menu-divider"></span>
                 <li class="menu-item">Web</li>
+                <span class="menu-divider"></span>
+                <li class="menu-item">Applications</li>
                 <span class="menu-divider"></span>
                 <li class="menu-item">Contact</li>
                 <span class="menu-divider"></span>
@@ -46,7 +46,7 @@
                     </div>
                     <div class="introduction">
                         I am excited to enter the
-                        sector and am happy to present some of my projects here
+                        sector and am happy to present some of my projects here:
                     </div>
                 </div>
                 <div class="profile-portrait">
@@ -57,18 +57,29 @@
 
         <main>
             <h2>Web</h2>
-            <ul>
-                <li class="project-frame">
-                    <div class="project-info">
-                        <h3>
-                            <a target="_blank" href="https://stmspokane.com/">STMspokane.com</a>
-                        </h3>
-                        A fully-customized HTML/CSS/JS implementation of a company website for my current employer.
-                        I proposed and executed this project as the only developer, with design input from the business owner.
-                    </div>
-                    <img class="project-image" src="./images/stmspokane.png" alt="Home Page photo of STMspokane.com">
-                </li>
-            </ul>
+            <div class="project-frame">
+
+                <div class="web-tile fading">
+                    <div class="tile-title">STMspokane.com</div>
+                    <img src="./images/stmspokane.png">
+                </div>
+
+                <div class="web-tile fading">
+                    <div class="tile-title">SirenCorexera</div>
+                    <img src="./images/beachbg.jpg">
+                </div>
+
+                <div class="button-container">
+                    <a class="previous" onclick="plusWTile(-1)">&#10094;</a>
+                    <a class="next" onclick="plusWTile(1)">&#10095;</a>
+                </div>
+
+                <div style="text-align:center; margin-top: 20px">
+                  <span class="dot" onclick="currentWTile(1)"></span>
+                  <span class="dot" onclick="currentWTile(2)"></span>
+                </div>
+
+            </div>
             <h2>Applications</h2>
         </main>
         <footer>
