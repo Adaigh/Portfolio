@@ -5,13 +5,37 @@
     background-size: cover;
 }
 
-.web-tile {
+.project-tile {
 	display: none;
+	flex-direction: row;
 	margin: 0 auto;
 	width: 80%;
 	height: 600px;
 	gap: 20px;
 	justify-content: space-between;
+}
+
+.project-tile img {
+	display: block;
+	border-radius: 25px;
+}
+
+.tile-info {
+	flex-direction: column;
+	gap: 30px;
+}
+
+.tile-title {
+  text-align: center;
+  margin: 20px;
+  font-weight: 700;
+  font-size: 1.5em;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.tile-data li{
+	list-style: none;
+	margin-top: 15px;
 }
 
 .button-container {
@@ -39,41 +63,12 @@
   background-color: rgba(0,0,0,0.8);
 }
 
-.tile-title {
-  text-align: center;
-  margin: 20px;
-  font-weight: 700;
-  font-size: 1.5em;
-  font-family: 'Open Sans', sans-serif;
+.fade-in {
+  animation-name: fade-in;
+  animation-duration: 0.5s;
 }
 
-.dot {
-  cursor: pointer;
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #FFF;
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.2s ease;
-}
-
-.active, .dot:hover {
-  background-color: #777;
-}
-
-/* Fading animation */
-.fading {
-  animation-name: fade;
-  animation-duration: 1.5s;
-}
-
-@keyframes fade {
-  from {opacity: .4}
+@keyframes fade-in {
+  from {opacity: 0}
   to {opacity: 1}
-}
-
-.web-tile img {
-	display: block;
-	border-radius: 25px;
 }
