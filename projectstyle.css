@@ -10,27 +10,32 @@
 	flex-direction: row;
 	margin: 0 auto;
 	width: 80%;
-	height: 600px;
+	height: 500px;
 	gap: 20px;
+	opacity: 1;
 	justify-content: space-between;
 }
 
-.project-tile img {
+.image-frame {
 	display: block;
-	border-radius: 25px;
+	width: 800px;
+	height: 100%;
+	flex-shrink: 0;
+	background-repeat: no-repeat;
 }
 
 .tile-info {
 	flex-direction: column;
 	gap: 30px;
+    text-shadow: #FFF 1px 1px 2px, #FFF 1px 1px 2px;
 }
 
 .tile-title {
-  text-align: center;
-  margin: 20px;
-  font-weight: 700;
-  font-size: 1.5em;
-  font-family: 'Open Sans', sans-serif;
+	text-align: center;
+	margin: 20px;
+	font-weight: 700;
+	font-size: 1.5em;
+	font-family: 'Open Sans', sans-serif;
 }
 
 .tile-data li{
@@ -44,31 +49,50 @@
 }
 
 .previous, .next {
-  cursor: pointer;
-  padding: 16px;
-  margin-top: -350px;
-  height: 30px;
-  color: #FFF;
-  transition: 0.5s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
-  background-color: rgba(0,0,0,0.3);
+	cursor: pointer;
+	padding: 16px;
+	margin-top: -350px;
+	height: 30px;
+	color: #FFF;
+	transition: 0.5s ease;
+	border-radius: 0 3px 3px 0;
+	user-select: none;
+	background-color: rgba(0,0,0,0.3);
+	z-index: 9;
 }
 
 .next {
-  border-radius: 3px 0 0 3px;
+	border-radius: 3px 0 0 3px;
 }
 
 .previous:hover, .next:hover {
-  background-color: rgba(0,0,0,0.8);
+	background-color: rgba(0,0,0,0.8);
 }
 
 .fade-in {
-  animation-name: fade-in;
-  animation-duration: 0.5s;
+    animation-name: fade-in;
+    animation-duration: 1s;
 }
 
 @keyframes fade-in {
-  from {opacity: 0}
-  to {opacity: 1}
+    from {opacity: 0.1}
+    to {opacity: 1}
+}
+
+@media only screen and (max-width: 740px) {
+	.project-tile {
+		height: 400px;
+		flex-direction: column-reverse;
+	}
+
+	.image-frame {
+		height: 200px;
+		width: 300px;
+		background-size: cover;
+	}
+
+	.project-tile {
+		justify-content: start;
+		align-items: center;
+	}
 }

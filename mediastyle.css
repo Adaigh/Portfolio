@@ -1,6 +1,7 @@
 @media only screen and (max-width: 740px) {
 
 	.profile-banner {
+		padding: 100px 10%;
 		flex-direction: column;
 		gap: 30px;
 	}
@@ -34,7 +35,7 @@
 	.menu {
 		position: fixed;
 		top: 80px;
-		left: 110px;
+		left: 160px;
 		flex-direction: column;
 		min-width: 100px;
 		background-color: #FFF;
