@@ -35,4 +35,25 @@ function showTile(num) {
   if (num > tiles.length-1) {tileIndex = tileIndex % tiles.length}
   if (num < 0) {tileIndex = tiles.length-1}
   tiles[tileIndex].style.display = "flex";
+  let string = (tileIndex + 1) + "/" + tiles.length;
+  document.getElementById("project-number-text").innerHTML = string;
 }
+
+function makeObs(slider) {
+  let obs = new IntersectionObserver(elements => {
+    elements.forEach(ele => {
+      if (ele.isIntersecting) {
+        slider.classList.add("active");
+        return;
+      }
+
+      slider.classList.remove("active");
+    });
+  });
+
+  obs.observe(slider);
+}
+
+makeObs(document.querySelector(".projects"));
+makeObs(document.querySelector(".contact"));
+makeObs(document.querySelector(".resume"));
