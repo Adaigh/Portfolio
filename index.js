@@ -1,3 +1,4 @@
+//Menu
 const menuButton = document.querySelector(".menu-button");
 const menu = document.querySelector(".menu");
 
@@ -11,6 +12,8 @@ document.querySelectorAll(".menu-item").forEach(n => n.addEventListener("click",
 	menu.classList.remove("active");
 }))
 
+
+//Project tiles and buttons
 const prevButton = document.querySelector(".previous");
 const nextButton = document.querySelector(".next");
 
@@ -39,6 +42,8 @@ function showTile(num) {
   document.getElementById("project-number-text").innerHTML = string;
 }
 
+
+//Animation control for section dividers
 function makeObs(slider) {
   let obs = new IntersectionObserver(elements => {
     elements.forEach(ele => {
@@ -57,3 +62,41 @@ function makeObs(slider) {
 makeObs(document.querySelector(".projects"));
 makeObs(document.querySelector(".contact"));
 makeObs(document.querySelector(".resume"));
+
+
+//Image cycling for project tiles
+function nextImage(element) {
+  let currentFrame = document.getElementById(element);
+  let currentImage = currentFrame.style.backgroundImage;
+  
+  if(currentImage == "url(\"./images/stmspokane_1.png\")") {
+    currentFrame.style.backgroundImage = "url(\"./images/stmspokane_2.png\")";
+    return;
+  }
+  if(currentImage == "url(\"./images/stmspokane_2.png\")") {
+    currentFrame.style.backgroundImage = "url(\"./images/stmspokane_3.png\")";
+    return;
+  }
+  if(currentImage == "url(\"./images/stmspokane_3.png\")") {
+    currentFrame.style.backgroundImage = "url(\"./images/stmspokane_1.png\")";
+    return;
+  }
+
+  if(currentImage == "url(\"./images/PON_HA_1.png\")") {
+    currentFrame.style.backgroundImage = "url(\"./images/PON_HA_2.png\")";
+    return;
+  }
+  if(currentImage == "url(\"./images/PON_HA_2.png\")") {
+    currentFrame.style.backgroundImage = "url(\"./images/PON_HA_1.png\")";
+    return;
+  }
+
+  if(currentImage == "url(\"./images/EPM_1.png\")") {
+    currentFrame.style.backgroundImage = "url(\"./images/EPM_2.png\")";
+    return;
+  }
+  if(currentImage == "url(\"./images/EPM_2.png\")") {
+    currentFrame.style.backgroundImage = "url(\"./images/EPM_1.png\")";
+    return;
+  }
+}

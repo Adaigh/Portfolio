@@ -1,5 +1,5 @@
 .project-frame {
-    padding: 200px 0;
+    padding: 100px 0;
     align-items: center;
     background-image: url("./images/mountainbg_1.png");
     background-size: cover;
@@ -32,12 +32,20 @@
 	flex-shrink: 0;
 	background-repeat: no-repeat;
 	background-position-y: center;
+	cursor: pointer;
+	transition: all 0.5s ease-in-out;
+}
+
+.image-frame:hover {
+	background-color: rgba(0, 0, 0, 0.5);
+	border-radius: 25px;
 }
 
 .tile-info {
 	flex-direction: column;
 	margin: auto 0;
     text-shadow: #FFF 1px 1px 2px, #FFF 1px 1px 2px;
+    min-width: 200px;
 }
 
 .tile-title {
