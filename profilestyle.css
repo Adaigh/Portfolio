@@ -1,0 +1,76 @@
+.profile-banner {
+    padding: 300px 10%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-image: url("./images/plantbg_1.png");
+    background-size: cover;
+}
+
+.profile-portrait {
+    padding: 10px;
+    display: block;
+    margin: 15px;
+    height: 280px;
+    flex-basis: 200px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    overflow: hidden;
+    padding-bottom: 20px;
+    background-color: #FFF;
+    border-radius: 15px;
+}
+
+.profile-portrait img {
+    border-radius: 5px;
+    width: 200px;
+    object-fit: cover;
+}
+
+.profile-info {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    text-shadow: #FFF 1px 1px 2px, #FFF 1px 1px 2px;
+}
+
+.name-text {
+    font-size: 1.5em;
+    font-style: italic;
+    font-weight: 700;
+    align-self: center;
+    letter-spacing: .5rem;
+    word-spacing: 1rem;
+}
+
+.title-text {
+    font-size: 2.5rem;
+    font-weight: 900;
+    align-self: center;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.introduction {
+    padding: 0 5%;
+    text-align: center;
+    text-justify: inter-character;
+    font-weight: 600;
+}
+
+@media only screen and (max-width: 740px) {
+
+    .profile-banner {
+        padding: 100px 10%;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .profile-portrait {
+        flex-basis: 280px;
+    }
+
+    .introduction {
+        margin: 0;
+    }
+}

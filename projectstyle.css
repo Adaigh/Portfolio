@@ -33,7 +33,7 @@
 	background-repeat: no-repeat;
 	background-position-y: center;
 	cursor: pointer;
-	transition: all 0.5s ease-in-out;
+	transition: all 0.5s linear;
 }
 
 .image-frame:hover {
@@ -98,16 +98,24 @@
 }
 
 @media only screen and (max-width: 740px) {
+	.project-frame {
+		overflow: unset;
+	}
+
 	.project-tile {
-		height: 400px;
 		flex-direction: column-reverse;
+		justify-content: unset;
 	}
 
 	.image-frame {
 		height: 250px;
 		width: 300px;
-		background-size: cover;
+		background-size: contain;
 		background-position: center;
+	}
+
+	.image-frame:hover {
+		border-radius: 10px;
 	}
 
 	.project-tile {
@@ -116,25 +124,3 @@
 	}
 }
 
-.section-divider {
-    padding: 50px 0;
-    text-align: center;
-    font-family: 'Caveat', cursive;
-    font-size: 50px;
-    position: relative;
-}
-
-.slider {
-	position: absolute;
-	height: 100%;
-	width: 100%;
-	top: 0;
-	right: 0;
-	z-index: 2;
-	background-color: #FFF;
-	transition: width 1s linear;
-}
-
-.slider.active {
-	width: 0;
-}
