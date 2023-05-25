@@ -3,8 +3,14 @@
     padding: 0;
 }
 
-a {
-    color: #800;
+.menu-item a {
+    color: #999;
+    text-decoration: none;
+    transition: color 0.5s linear;
+}
+
+.menu-item a:hover {
+    color: #000;
 }
 
 body {
@@ -37,10 +43,12 @@ body {
     text-align: center;
 }
 
-.page-title-text {
+.page-title-text a{
     font-size: 2em;
     font-weight: 800;
     font-family: 'Open Sans', sans-serif;
+    color: #000;
+    text-decoration: none;
 }
 
 .menu {
@@ -97,7 +105,6 @@ body {
     z-index: 2;
     background-color: #FFF;
     transition: width 1s linear;
-    transition-delay: 0.25s;
 }
 
 .slider.active {
