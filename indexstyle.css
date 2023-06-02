@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+a {
+    color: #800;
+}
+
 .menu-item a {
     color: #999;
     text-decoration: none;

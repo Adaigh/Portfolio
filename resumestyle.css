@@ -1,0 +1,7 @@
+.resume-frame {
+	padding: 200px 0;
+    background-image: url("./images/cloudsbg_1.png");
+    background-size: cover;
+    background-position-y: center;
+    overflow: hidden;
+}
