@@ -28,24 +28,22 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 20px;
-    transition: background-color 0.5s linear;
+    transition: all 0.5s linear;
     margin: 5px auto;
     padding: 10px;
     border-radius: 10px;
+    color: #D77;
+    text-decoration: none;
+    font-family: monospace;
+    font-size: 20px;
+    text-shadow: #000 1px 1px 2px
 }
 
 .contact-item:hover {
+    color: #822;
     background-color: rgba(0, 0, 0, 0.2);
-}
-
-.contact-item a {
-    font-family: monospace;
-    text-decoration: none;
-    font-size: 20px;
-}
-
-.contact-item a:hover { 
-    text-decoration: underline;
+    text-shadow: none;
+    font-weight: 600;
 }
 
 .contact-icon {

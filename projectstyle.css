@@ -44,7 +44,6 @@
 .tile-info {
 	flex-direction: column;
 	margin: auto 0;
-    text-shadow: #FFF 1px 1px 2px, #FFF 1px 1px 2px;
     min-width: 200px;
 }
 
@@ -104,7 +103,8 @@
 
 	.project-tile {
 		flex-direction: column-reverse;
-		justify-content: unset;
+		justify-content: start;
+		align-items: center;
 	}
 
 	.image-frame {
@@ -112,15 +112,19 @@
 		width: 300px;
 		background-size: contain;
 		background-position: center;
+		background-color: rgba(0, 0, 0, 0.5);
+		border-radius: 10px;
 	}
 
 	.image-frame:hover {
 		border-radius: 10px;
 	}
 
-	.project-tile {
-		justify-content: start;
-		align-items: center;
+	.tile-info {
+		flex-direction: column;
+		margin: 10px 0;
+	    min-width: 200px;
 	}
+
 }
 
