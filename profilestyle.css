@@ -5,12 +5,13 @@
     align-items: center;
     background-image: url("./images/plantbg_1.png");
     background-size: cover;
+    gap: 10px;
+    justify-content: space-evenly;
 }
 
 .profile-portrait {
     padding: 10px;
     display: block;
-    margin: 15px;
     height: 280px;
     flex-basis: 200px;
     flex-grow: 0;
@@ -19,6 +20,7 @@
     padding-bottom: 20px;
     background-color: #FFF;
     border-radius: 15px;
+    box-shadow: 0px 0px 3px #666;
 }
 
 .profile-portrait img {
@@ -27,18 +29,25 @@
     object-fit: cover;
 }
 
+.profile-divider {
+    background-color: #666;
+    width: 5px;
+    height: 250px;
+}
+
 .profile-info {
-    width: 80%;
+    min-width: 300px;
+    width: 40%;
     display: flex;
     flex-direction: column;
     gap: 30px;
+    text-align: right;
 }
 
 .name-text {
     font-size: 1.5em;
     font-style: italic;
     font-weight: 700;
-    align-self: center;
     letter-spacing: .5rem;
     word-spacing: 1rem;
 }
@@ -46,27 +55,39 @@
 .title-text {
     font-size: 2.5rem;
     font-weight: 900;
-    align-self: center;
     font-family: 'Open Sans', sans-serif;
 }
 
 .introduction {
-    padding: 0 5%;
-    text-align: center;
     text-justify: inter-character;
     font-weight: 600;
 }
 
-@media only screen and (max-width: 740px) {
+@media only screen and (max-width: 1500px) {
+    .profile-banner {
+        padding: 200px 10%;
+    }
+}
 
+@media only screen and (max-width: 740px) {
+    
     .profile-banner {
         padding: 100px 10%;
         flex-direction: column;
-        gap: 30px;
+        gap: 20px;
     }
 
     .profile-portrait {
         flex-basis: 280px;
+    }
+
+    .profile-divider {
+        height: 5px;
+        width: 60%;
+    }
+
+    .profile-info {
+        text-align: center;
     }
 
     .introduction {
