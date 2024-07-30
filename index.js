@@ -3,13 +3,13 @@ const menuButton = document.querySelector(".menu-button");
 const menu = document.querySelector(".menu");
 
 menuButton.addEventListener("click", () => {
-	menuButton.classList.toggle("active");
-	menu.classList.toggle("active");
+  menuButton.classList.toggle("active");
+  menu.classList.toggle("active");
 })
 
 document.querySelectorAll(".menu-item").forEach(n => n.addEventListener("click", () => {
-	menuButton.classList.remove("active");
-	menu.classList.remove("active");
+  menuButton.classList.remove("active");
+  menu.classList.remove("active");
 }))
 
 
@@ -17,12 +17,12 @@ document.querySelectorAll(".menu-item").forEach(n => n.addEventListener("click",
 const prevButton = document.querySelector(".previous");
 const nextButton = document.querySelector(".next");
 
-prevButton.addEventListener("click", () =>{
-	changeTile(-1);
+prevButton.addEventListener("click", () => {
+  changeTile(-1);
 })
 
-nextButton.addEventListener("click", () =>{
-	changeTile(1);
+nextButton.addEventListener("click", () => {
+  changeTile(1);
 })
 
 const tiles = document.getElementsByClassName("project-tile");
@@ -35,8 +35,8 @@ function changeTile(diff) {
 }
 
 function showTile(num) {
-  if (num > tiles.length-1) {tileIndex = tileIndex % tiles.length}
-  if (num < 0) {tileIndex = tiles.length-1}
+  if (num > tiles.length - 1) { tileIndex = tileIndex % tiles.length }
+  if (num < 0) { tileIndex = tiles.length - 1 }
   tiles[tileIndex].style.display = "flex";
   let string = (tileIndex + 1) + "/" + tiles.length;
   document.getElementById("project-number-text").innerHTML = string;
@@ -68,35 +68,13 @@ makeObs(document.querySelector(".resume"));
 function nextImage(element) {
   let currentFrame = document.getElementById(element);
   let currentImage = currentFrame.style.backgroundImage;
-  
-  if(currentImage == "url(\"./images/stmspokane_1.png\")") {
-    currentFrame.style.backgroundImage = "url(\"./images/stmspokane_2.png\")";
-    return;
-  }
-  if(currentImage == "url(\"./images/stmspokane_2.png\")") {
-    currentFrame.style.backgroundImage = "url(\"./images/stmspokane_3.png\")";
-    return;
-  }
-  if(currentImage == "url(\"./images/stmspokane_3.png\")") {
-    currentFrame.style.backgroundImage = "url(\"./images/stmspokane_1.png\")";
-    return;
-  }
 
-  if(currentImage == "url(\"./images/PON_HA_1.png\")") {
-    currentFrame.style.backgroundImage = "url(\"./images/PON_HA_2.png\")";
-    return;
-  }
-  if(currentImage == "url(\"./images/PON_HA_2.png\")") {
-    currentFrame.style.backgroundImage = "url(\"./images/PON_HA_1.png\")";
-    return;
-  }
+  currentNumber = currentImage.match(/([0-9])/)[0]
 
-  if(currentImage == "url(\"./images/EPM_1.png\")") {
-    currentFrame.style.backgroundImage = "url(\"./images/EPM_2.png\")";
-    return;
+  if (currentFrame.id == 'stm-spa-frame' || currentFrame.id == 'stm-frame') {
+    currentFrame.style.backgroundImage = currentImage.replace(currentNumber, (currentNumber % 3 + 1))
   }
-  if(currentImage == "url(\"./images/EPM_2.png\")") {
-    currentFrame.style.backgroundImage = "url(\"./images/EPM_1.png\")";
-    return;
+  else {
+    currentFrame.style.backgroundImage = currentImage.replace(currentNumber, (currentNumber % 2 + 1))
   }
 }
