@@ -66,15 +66,14 @@ makeObs(document.querySelector(".resume"));
 
 //Image cycling for project tiles
 function nextImage(element) {
-  let currentFrame = document.getElementById(element);
-  let currentImage = currentFrame.style.backgroundImage;
+  let currentImage = element.style.backgroundImage;
 
   currentNumber = currentImage.match(/([0-9])/)[0]
 
-  if (currentFrame.id == 'stm-spa-frame' || currentFrame.id == 'stm-frame') {
-    currentFrame.style.backgroundImage = currentImage.replace(currentNumber, (currentNumber % 3 + 1))
+  if (element.id == 'stm-spa-frame' || element.id == 'stm-frame') {
+    element.style.backgroundImage = currentImage.replace(currentNumber, (currentNumber % 3 + 1))
   }
   else {
-    currentFrame.style.backgroundImage = currentImage.replace(currentNumber, (currentNumber % 2 + 1))
+    element.style.backgroundImage = currentImage.replace(currentNumber, (currentNumber % 2 + 1))
   }
 }
