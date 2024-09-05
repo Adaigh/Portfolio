@@ -183,4 +183,18 @@ body {
     a:hover {
         background: $black-transparent;
     }
+    div.map-frame {
+        @extend.mx-auto;
+        @extend.mx-lg-5;
+        @extend.d-block;
+        width: 400px;
+        height: 300px;
+    }
+}
+
+@include media-breakpoint-down(lg) {
+    .custom-reactive-contact-container div.map-frame {
+        width: 95%;
+        height: 100%;
+    }
 }

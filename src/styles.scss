@@ -40,12 +40,12 @@ $utilities: map-merge($utilities,
 
 // Adjust scroll settings for mobile to mitigate menu overlapping
 div {
-    scroll-margin-top: 0;
+    scroll-margin-top: -15vh;
 }
 
 @include media-breakpoint-down(md) {
     div {
-        scroll-margin-top: 100px;
+        scroll-margin-top: 120px;
     }
 }
 

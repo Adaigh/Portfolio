@@ -18,7 +18,7 @@ const Contact = () => {
                     
                 <div className="custom-reactive-contact-container">
 
-                    <div className="mx-auto mx-lg-5">
+                    <div className="map-frame">
                         <GmapiFrame />
                     </div>
 
