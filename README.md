@@ -1,3 +1,7 @@
-# Converting my Portfolio into a static React app
+# Portfolio page using Vite + ReactJS and Bootstrap CSS
 
-This project is in-progress, using a CMS style data package to populate a static React web application.
+This is a live project to display projects I've been working on.
+
+The `deployment` branch holds the appropriate project structure for GitHub pages.
+
+Check out the Vite/React/Bootstrap page [here](https://adaigh.github.io/Portfolio)
