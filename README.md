@@ -1,6 +1,6 @@
 # Portfolio page using Vite + ReactJS and Bootstrap CSS
 
-This is a live project to display projects I've been working on.
+This is a live project to display other programming projects I've been working on.
 
 The `deployment` branch holds the appropriate project structure for GitHub pages.
 
