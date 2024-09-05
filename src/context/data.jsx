@@ -46,6 +46,7 @@ export const data = {
             title: "Projects",
             message: [
                 "Here you can see some of the bigger projects I've been working on.",
+                "This page itself utilizes Vite + React and Bootstrap!",
                 "You can click the pictures to cycle through different images.",
                 "Remember to check back often, more projects are coming!"
             ]
