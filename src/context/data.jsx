@@ -1,0 +1,203 @@
+
+export const data = {
+
+    navigation: {
+        brandText: "AJD",
+        links: [
+            {
+                text: "Projects",
+                ref: "#Projects"
+            },
+            {
+                text: "R&eacute;sum&eacute;",
+                ref: "#Resume"
+            },
+            {
+                text: "Contact",
+                ref: "#Contact"
+            }
+        ]
+    },
+
+    introduction: {
+        name: "Alexander Daigh",
+        title: "B.S. Software Engineering",
+        subtitle: "Summa Cum Laude",
+        message: "I am a driven worker and a motivated developer.",
+        description: "I graduated from <link_0> in December 2023.\nSince then, I've been pursuing MERN stack development while working with <link_1> as a Quality Assurance Tester as well as working as a freelance web developer.",
+        links: [
+            {
+                text: "Arizona State University",
+                ref: "https://asuonline.asu.edu/online-degree-programs/undergraduate/bachelor-science-software-engineering/?utm_source=google&utm_medium=cpc&utm_content=search_UG_Software%20Engineering_NB&utm_campaign=22-fy20_q4_phase2_2022-BR_Verticals_Engineering_Non&utm_ecd22=22&utm_term=asu%20software%20engineering&gclid=CjwKCAjwrNmWBhA4EiwAHbjEQOXodBHfMgQNK5MNhaUpgaFA_tJg6YCXJp_br1MiC2PFPa5p9ysZfRoC8vcQAvD_BwE&gclsrc=aw.ds"
+            },
+            {
+                text: "DataAnnotation",
+                ref: "https://www.dataannotation.tech/"
+            }
+        ],
+        img: {
+            ref: "./profilepic.jpg",
+            altText: "Portrait photo of Alexander D."
+        }
+    },
+
+    project: {
+        header:{
+            title: "Projects",
+            message: [
+                "Here you can see some of the bigger projects I've been working on.",
+                "This page itself utilizes Vite + React and Bootstrap!",
+                "You can click the pictures to cycle through different images.",
+                "Remember to check back often, more projects are coming!"
+            ]
+        },
+        projects: [
+            {
+                title: {
+                    type: "link",
+                    text: "STMspokane.com (MERN)",
+                    ref: "https://stmspokane.com/"
+                },
+                description: [
+                    "Mobile-responsive web application with scheduling services and automated email notifications.",
+                    "Implements common features such as https, user access control and authentication, password encrytion, and a database api."
+                ],
+                bullets: [
+                    "MERN stack SPA using Vite (React/JS), Express, and MongoDB Atlas",
+                    "Docker microservice-style implementation for frontend/backend/HTTPS server",
+                    "Utilizes Mailtrap platform for SMTP",
+                    "Deployed on AWS EC2",
+                    "DNS service hosted on AWS Route 53"
+                ],
+                slides: [
+                    './stmspa_1.jpg', './stmspa_2.jpg', './stmspa_3.jpg'
+                ],
+            },
+            {
+                title: {
+                    type: "text",
+                    text: "STMspokane.com (Version 1, HTML/CSS/JS)"
+                },
+                description: [
+                    "Version 1 of STMspokane.com (now inactive)",
+                    "Static website developed along owner's creative guidelines",
+                    "Increased monthly average walk-ins by 120% and return customers by 30%",
+                ],
+                bullets: [
+                    "HTML, CSS, and JavaScript",
+                    "Deployed via AWS S3 and Route 53"
+                ],
+                slides: [
+                    "./stmspokane_1.jpg", "./stmspokane_2.jpg", "./stmspokane_3.jpg"
+                ],
+            },
+            {
+                title: {
+                    type: "text",
+                    text: "PON Health Alert (Angular/Python/Mongo)"
+                },
+                description: [
+                    "Senior class project",
+                    "Deep querying component to find errors throughout a complex optical network",
+                    "Scalable to vast network sizes and various arrangements",
+                    "<r>(IP protected content excluded)</r>",
+                ],
+                bullets: [
+                    "Angular",
+                    "Python/Django",
+                    "MongoDB"
+                ],
+                slides: [
+                    "./PON_HA_1.jpg", "./PON_HA_2.jpg"
+                ],
+            },
+            {
+                title: {
+                    type: "text",
+                    text: "Excel Property Ledger Management (VBA/Excel/Access)"
+                },
+                description: [
+                    "Class prototyping project",
+                    "Functional prototype of ledger software",
+                    "User authentication, multiple modes, and many common ledger functions."
+                ],
+                bullets: [
+                    "Microsoft Excel",
+                    "Microsoft Access",
+                    "Visual Basic for Applications (VBA)"
+                ],
+                slides: [
+                    "./EPM_1.jpg", "./EPM_2.jpg"
+                ],
+            },
+        ],
+    },
+
+    resume: {
+        header:{
+            title: "R&eacute;sum&eacute;",
+            message: [
+                "Here are my educational accomplishments and recent employers.",
+                "For further information, please contact me via email (see bottom)."
+            ]
+        },
+        education: [
+            {
+                institution: "Arizona State University",
+                certificate: "B.S. Software Engineering",
+                gpa: 3.89,
+                period: "August 2020 - December 2023",
+                location: "Tempe, AZ (Online)",
+            },
+            {
+                institution: "Naval Nuclear Power School",
+                certificate: " Nuclear Electronic Technician",
+                gpa: 3.64,
+                period: "May 2011 - May 2012",
+                location: "Goose Creek, SC",
+            },
+            {
+                institution: "Lake City High School",
+                certificate: "H.S. Diploma",
+                gpa: 3.69,
+                period: "Graduated June 2008",
+                location: "Coeur d'Alene, ID",
+            },
+        ],
+        employment: [
+            {
+                employer: "DataAnnotation",
+                position: "Quality Assurance Tester",
+                period: "Feb 2024 - Present",
+            },
+            {
+                employer: "Arizona State University",
+                position: "Undergraduate Teaching Assistant",
+                period: "Spring/Summer session of 2022",
+            },
+            {
+                employer: "STM Tuning",
+                position: "Web Developer, Automotive Technician",
+                period: "June 2022 - Present",
+            },
+            {
+                employer: "Spiceology Inc.",
+                position: "Automation Team Leader",
+                period: "June 2021 - June 2022",
+            },
+        ]
+    },
+
+    contact: {
+        header:{
+            title: "Contact Information",
+            message: [
+                "I'm currently located in Spokane, WA but am willing to relocate.",
+                "Please feel free to check out my links!"
+            ]
+        },
+        email: "alexdaigh@gmail.com",
+        linkedin: "https://www.linkedin.com/in/alexanderdaigh/",
+        github: "https://github.com/Adaigh",
+    }
+}
