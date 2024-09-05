@@ -24,15 +24,15 @@ const Contact = () => {
 
                     <div className="d-flex flex-column gap-3 justify-content-center">
                         <a href={`mailto: ${contact.email}`} className="mx-auto">
-                            <img src="/email_icon.png" className="contact-icon" />
+                            <img src="./email_icon.png" className="contact-icon" />
                             {contact.email}
                         </a>
                         <a href={contact.linkedin} className="mx-auto" target="_blank">
-                            <img src="/linkedin_icon.png" className="contact-icon" />
+                            <img src="./linkedin_icon.png" className="contact-icon" />
                             LinkedIn
                         </a>
                         <a href={contact.github} className="mx-auto" target="_blank">
-                            <img src="/github_icon.png" className="contact-icon" />
+                            <img src="./github_icon.png" className="contact-icon" />
                             GitHub
                         </a>
                     </div>
