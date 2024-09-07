@@ -6,8 +6,7 @@ import App from './App.jsx'
 import './styles.scss'
 
 // Import all of Bootstrap's JS
-import * as bootstrap from 'bootstrap'
-import { SiteContext, SiteContextProvider } from './context/SiteContext.jsx'
+import { SiteContextProvider } from './context/SiteContext.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>

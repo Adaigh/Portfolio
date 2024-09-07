@@ -1,8 +1,7 @@
-import { Suspense, useState } from "react"
-import { lload } from "../loader"
+import { lazy, Suspense, useState } from "react"
 // import Dijkstra from "../demos/pathfinding/Dijkstra"
 
-const Dijkstra = lload('./demos/pathfinding/Dijkstra')
+const Dijkstra = lazy(() => import("../demos/pathfinding/Dijkstra"))
 
 const Demonstrations = () => {
 
@@ -10,8 +9,10 @@ const Demonstrations = () => {
 
     return (
         <Suspense fallback={<h1>Loading...</h1>}>
-            {show && <Dijkstra />}
-            <button onClick={() => show ? setShow(false) : setShow(true)} >Show it</button>
+            <div className="mx-auto w-fc banner">
+                {show && <Dijkstra />}
+                <button onClick={() => show ? setShow(false) : setShow(true)} >Show it</button>
+            </div>
         </Suspense>
     )
 }

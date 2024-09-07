@@ -1,5 +1,5 @@
-$white-transparent: rgba(255,255,255,0.3);
-$fully-transparent: rgba(0,0,0,0);
+$white-transparent:rgba(255, 255, 255, 0.3);
+$fully-transparent:rgba(0, 0, 0, 0);
 
 // Define bootstrap variable overrides
 $carousel-transition-duration: 1.5s;
@@ -7,7 +7,7 @@ $carousel-transition: transform $carousel-transition-duration ease-in-out;
 $accordion-bg: $white-transparent;
 $accordion-button-active-bg: $fully-transparent;
 $accordion-button-active-color: $fully-transparent;
-$accordion-button-focus-box-shadow:none;
+$accordion-button-focus-box-shadow: none;
 $accordion-border-width: 0;
 $card-bg: $white-transparent;
 
