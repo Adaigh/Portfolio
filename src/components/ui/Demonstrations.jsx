@@ -1,7 +1,7 @@
 import { lazy, Suspense, useState } from "react"
 // import Dijkstra from "../demos/pathfinding/Dijkstra"
 
-const Dijkstra = lazy(() => import("../demos/pathfinding/Dijkstra"))
+const AStar = lazy(() => import("../demos/pathfinding/Astar/AStar"))
 
 const Demonstrations = () => {
 
@@ -10,7 +10,7 @@ const Demonstrations = () => {
     return (
         <Suspense fallback={<h1>Loading...</h1>}>
             <div className="mx-auto w-fc banner">
-                {show && <Dijkstra />}
+                {show && <AStar />}
                 <button onClick={() => show ? setShow(false) : setShow(true)} >Show it</button>
             </div>
         </Suspense>
