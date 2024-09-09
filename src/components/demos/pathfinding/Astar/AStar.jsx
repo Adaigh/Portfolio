@@ -9,6 +9,7 @@ const AStar = () => {
 
     const aStarPathfinder = useCallback((grid, start, end) => {
 
+        // Stores data for each step in that the algorithm takes
         class SequenceStep {
             constructor(x, y, step) {
                 this.x = x
@@ -17,6 +18,7 @@ const AStar = () => {
             }
         }
 
+        // Records to be sorted via heap
         class HeapEntry {
             constructor(weight, x, y) {
                 this.weight = weight;
@@ -25,6 +27,7 @@ const AStar = () => {
             }
         }
 
+        // Memoization grid to record values and coordinates
         class AncestorCell {
             constructor(weight, pathLength, distance, px, py) {
                 this.weight = weight;
@@ -36,6 +39,7 @@ const AStar = () => {
 
         }
 
+        // Function to backtrack the found path through the memoization grid
         function backtrack(ancestors) {
 
             let path = [new SequenceStep(end[0], end[1], "path")]
@@ -56,16 +60,19 @@ const AStar = () => {
             return backPath.concat(path)
         }
 
-        // Initialize 
+        // Initialize Astar parameters
         let found = false
         let sequence = []
 
+        // Heap init
         const customComparator = (a, b) => a.weight - b.weight;
         let heap = new Heap(customComparator)
         heap.push(new HeapEntry(0, start[0], start[1]))
 
+        // Sequence init
         sequence.push(new SequenceStep(start[0], start[1], "heaped"))
 
+        // Memoization and visited grid init
         let ancestors = new Array()
         let visited = new Array()
         for (let i = 0; i < grid.length; i++) {
@@ -78,25 +85,31 @@ const AStar = () => {
         }
         ancestors[start[0]][start[1]] = new AncestorCell(0, 0, 0, null, null)
 
-        // Explore
+        // Explore Astar grid
         while (heap.length > 0 && !found) {
-            let { weight, x, y } = heap.pop()
 
+            // Pop the 'lightest' weight, record as visited
+            let { weight, x, y } = heap.pop()
             visited[x][y] = true
             sequence.push(new SequenceStep(x, y, "analyzing"))
 
+            // Check all neighbors
             for (let dir of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
                 let new_x = x + dir[0]
                 let new_y = y + dir[1]
-                // console.log(new_x, new_y)
+
+                // Bounds check + barrier check + visited check
                 if (new_x >= 0 && new_x < grid.length && new_y >= 0 && new_y < grid.length) {
-                    // console.log("Passed guards")
                     if (grid[new_x][new_y] == 1) continue
                     if (visited[new_x][new_y]) continue
-                    // console.log("Analyzing", new_x, new_y)
+
+                    // Calculating new data
                     let newPathLength = ancestors[x][y].pathLength + 1.0
+                        // Using point-distance as heuristic function
                     let newDistance = (((end[0] - new_x) ** 2 + (end[1] - new_y) ** 2) ** 0.5)
                     let newWeight = newPathLength + newDistance
+
+                    // Checking for end cell
                     if (new_x == end[0] && new_y == end[1]) {
                         ancestors[new_x][new_y] = new AncestorCell(newWeight, newPathLength, newDistance, x, y)
                         found = true
@@ -104,9 +117,9 @@ const AStar = () => {
                         return sequence.concat(backtracking)
                     }
                     else {
-                        // Calculate the new cost using the actual cost plus estimated straight-line-distance
-                        if (ancestors[new_x][new_y].weight == Number.MAX_SAFE_INTEGER || ancestors[new_x][new_y].weight > newWeight) {
-                            // console.log("Pushing to heap")
+                        
+                        // Only push to the heap if it's a shorter path
+                        if (ancestors[new_x][new_y].weight > newWeight) {
                             ancestors[new_x][new_y] = new AncestorCell(newWeight, newPathLength, newDistance, x, y)
                             heap.push(new HeapEntry(newWeight, new_x, new_y))
                             sequence.push(new SequenceStep(new_x, new_y, "heaped"))
@@ -116,6 +129,7 @@ const AStar = () => {
             }
         }
 
+        // Delivers a sequence that turns start and end red if not found.
         if (!found) {
             console.log("Not found")
             return [new SequenceStep(start[0], start[1], "analyzing"), new SequenceStep(end[0], end[1], "analyzing")]
