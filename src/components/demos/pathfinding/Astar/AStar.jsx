@@ -4,7 +4,7 @@ import { Heap } from 'heap-js'
 
 const AStar = () => {
 
-    const [width, setWidth] = useState(10)
+    const [width, setWidth] = useState(20)
     let currentMode = useRef(1)
 
     const aStarPathfinder = useCallback((grid, start, end) => {
@@ -18,18 +18,18 @@ const AStar = () => {
         }
 
         class HeapEntry {
-            constructor(f, x, y) {
-                this.f = f;
+            constructor(weight, x, y) {
+                this.weight = weight;
                 this.x = x
                 this.y = y
             }
         }
 
         class AncestorCell {
-            constructor(f, g, h, px, py) {
-                this.f = f;
-                this.g = g;
-                this.h = h;
+            constructor(weight, pathLength, distance, px, py) {
+                this.weight = weight;
+                this.pathLength = pathLength;
+                this.distance = distance;
                 this.px = px;
                 this.py = py;
             }
@@ -37,38 +37,30 @@ const AStar = () => {
         }
 
         function backtrack(ancestors) {
+
             let path = [new SequenceStep(end[0], end[1], "path")]
             let backPath = [new SequenceStep(end[0], end[1], "back")]
 
-            while (path[0].x != start[0] && path[0].y != start[1]) {
-                console.log("Loop check")
-                let px = ancestors[path[0].x][path[0].y].px
-                let py = ancestors[path[0].x][path[0].y].py
+            let cx = path[0].x
+            let cy = path[0].y
+
+            while (ancestors[cx][cy].px != null && ancestors[cx][cy].py != null) {
+                let px = ancestors[cx][cy].px
+                let py = ancestors[cx][cy].py
                 path.unshift(new SequenceStep(px, py, "path"))
                 backPath.push(new SequenceStep(px, py, "back"))
-            }
-            let px = ancestors[path[0].x][path[0].y].px
-            let py = ancestors[path[0].x][path[0].y].py
-            path.unshift(new SequenceStep(px, py, "path"))
-            backPath.push(new SequenceStep(px, py, "back"))
-
-            for (let b of backPath) {
-                console.log(b)
-            }
-            for (let p of path) {
-                console.log(p)
+                cx = path[0].x
+                cy = path[0].y
             }
 
             return backPath.concat(path)
         }
 
-        console.log(grid, start, end)
-
         // Initialize 
         let found = false
         let sequence = []
 
-        const customComparator = (a, b) => a.f - b.f;
+        const customComparator = (a, b) => a.weight - b.weight;
         let heap = new Heap(customComparator)
         heap.push(new HeapEntry(0, start[0], start[1]))
 
@@ -86,12 +78,9 @@ const AStar = () => {
         }
         ancestors[start[0]][start[1]] = new AncestorCell(0, 0, 0, null, null)
 
-
-
-
         // Explore
         while (heap.length > 0 && !found) {
-            let { f, x, y } = heap.pop()
+            let { weight, x, y } = heap.pop()
 
             visited[x][y] = true
             sequence.push(new SequenceStep(x, y, "analyzing"))
@@ -99,27 +88,27 @@ const AStar = () => {
             for (let dir of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
                 let new_x = x + dir[0]
                 let new_y = y + dir[1]
-                console.log(new_x, new_y)
+                // console.log(new_x, new_y)
                 if (new_x >= 0 && new_x < grid.length && new_y >= 0 && new_y < grid.length) {
-                    console.log("Passed guards")
+                    // console.log("Passed guards")
                     if (grid[new_x][new_y] == 1) continue
                     if (visited[new_x][new_y]) continue
-                    console.log("Analyzing", new_x, new_y)
+                    // console.log("Analyzing", new_x, new_y)
+                    let newPathLength = ancestors[x][y].pathLength + 1.0
+                    let newDistance = (((end[0] - new_x) ** 2 + (end[1] - new_y) ** 2) ** 0.5)
+                    let newWeight = newPathLength + newDistance
                     if (new_x == end[0] && new_y == end[1]) {
-                        ancestors[new_x][new_y] = new AncestorCell(0, 0, 0, x, y)
+                        ancestors[new_x][new_y] = new AncestorCell(newWeight, newPathLength, newDistance, x, y)
                         found = true
                         let backtracking = backtrack(ancestors)
                         return sequence.concat(backtracking)
                     }
                     else {
                         // Calculate the new cost using the actual cost plus estimated straight-line-distance
-                        let newG = ancestors[x][y].g + 1.0
-                        let newH = (((end[0] - new_x) ** 2 + (end[1] - new_y) ** 2) ** 0.5)
-                        let newF = newG + newH
-                        if (ancestors[new_x][new_y].f == Number.MAX_SAFE_INTEGER || ancestors[new_x][new_y].f > newF) {
-                            console.log("Pushing to heap")
-                            ancestors[new_x][new_y] = new AncestorCell(newF, newG, newH, x, y)
-                            heap.push(new HeapEntry(newF, new_x, new_y))
+                        if (ancestors[new_x][new_y].weight == Number.MAX_SAFE_INTEGER || ancestors[new_x][new_y].weight > newWeight) {
+                            // console.log("Pushing to heap")
+                            ancestors[new_x][new_y] = new AncestorCell(newWeight, newPathLength, newDistance, x, y)
+                            heap.push(new HeapEntry(newWeight, new_x, new_y))
                             sequence.push(new SequenceStep(new_x, new_y, "heaped"))
                         }
                     }
@@ -129,7 +118,7 @@ const AStar = () => {
 
         if (!found) {
             console.log("Not found")
-            return []
+            return [new SequenceStep(start[0], start[1], "analyzing"), new SequenceStep(end[0], end[1], "analyzing")]
         }
     }, [])
 

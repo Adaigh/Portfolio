@@ -65,7 +65,6 @@ export const SquareGridCanvas = ({ n, mode, method }) => {
                         p5.square(start[0] * step, start[1] * step, 25)
                     }
                     start = [loc_x, loc_y]
-                    // console.log(start)
                 }
 
                 // End mode updates the end position
@@ -76,7 +75,6 @@ export const SquareGridCanvas = ({ n, mode, method }) => {
                         p5.square(end[0] * step, end[1] * step, 25)
                     }
                     end = [loc_x, loc_y]
-                    // console.log(end)
                 }
 
                 // All modes update the current cell
@@ -84,6 +82,8 @@ export const SquareGridCanvas = ({ n, mode, method }) => {
                 p5.fill(colors[mode.current][0], colors[mode.current][1], colors[mode.current][2])
                 p5.square(loc_x * step, loc_y * step, 25)
                 // console.log("Grid updated", grid)
+                // console.log("Start", start)
+                // console.log("End",end)
             }
         }
 
