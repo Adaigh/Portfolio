@@ -1,11 +1,9 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { SquareGridCanvas, Controls } from "../SquareGridCanvas";
 import { Heap } from 'heap-js'
 
 const AStar = () => {
 
-    const [width, setWidth] = useState(20)
-    let currentMode = useRef(1)
 
     const aStarPathfinder = useCallback((grid, start, end) => {
 
@@ -105,8 +103,8 @@ const AStar = () => {
 
                     // Calculating new data
                     let newPathLength = ancestors[x][y].pathLength + 1.0
-                        // Using point-distance as heuristic function
-                    let newDistance = (((end[0] - new_x) ** 2 + (end[1] - new_y) ** 2) ** 0.5)
+                    // Using point-distance as heuristic function
+                    let newDistance = ((end[0] - new_x) ** 2 + (end[1] - new_y) ** 2)
                     let newWeight = newPathLength + newDistance
 
                     // Checking for end cell
@@ -117,7 +115,7 @@ const AStar = () => {
                         return sequence.concat(backtracking)
                     }
                     else {
-                        
+
                         // Only push to the heap if it's a shorter path
                         if (ancestors[new_x][new_y].weight > newWeight) {
                             ancestors[new_x][new_y] = new AncestorCell(newWeight, newPathLength, newDistance, x, y)
@@ -139,9 +137,8 @@ const AStar = () => {
 
     return (
         <>
-            <h1>A* Pathfinding animation ....</h1>
-            <SquareGridCanvas n={width} mode={currentMode} method={aStarPathfinder} />
-            <Controls reference={currentMode} />
+            <h1 className="p-3">A* Pathfinding animation</h1>
+            <SquareGridCanvas method={aStarPathfinder} />
         </>
     )
 }

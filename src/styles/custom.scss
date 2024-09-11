@@ -3,7 +3,8 @@ $darkRed: #800;
 $lightRed: #d05;
 $lightGreen: #0c1;
 $bannerPad: min(30vh, 30vw);
-$black-transparent: rgba(0,0,0,0.3);
+$black-transparent: rgba(0, 0, 0, 0.3);
+
 // Custom default styles
 a {
     color: $darkRed;
@@ -16,9 +17,19 @@ body {
     font-weight: 600;
 }
 
+ul {
+    list-style: none;
+    padding-left: unset;
+}
+
+li {
+    @extend .my-2;
+}
+
 // Custom CSS classes
 .banner {
     padding-top: $bannerPad;
+    font-size: 1rem;
 }
 
 .banner:last-of-type {
@@ -57,14 +68,7 @@ body {
     color: $lightRed;
 }
 
-.project-list {
-    list-style: none;
-
-    li {
-        @extend .my-2;
-        font-size: 1rem;
-    }
-}
+.project-list {}
 
 .red-text {
     color: $red;
@@ -97,6 +101,26 @@ body {
 
 .navbar {
     z-index: $zindex-fixed;
+}
+
+
+@include media-breakpoint-down(lg) {
+    body {
+        font-size: 1rem;
+    }
+
+    .banner {
+        font-size: 0.8rem;
+    }
+
+    .bold-header, .spaced-header{
+        font-size: 1.4rem;
+    }
+
+    .custom-reactive-contact-container div.map-frame {
+        width: 95%;
+        height: 100%;
+    }
 }
 
 // Bootstrap-style breakpoint
@@ -170,6 +194,7 @@ body {
     @extend .gap-5;
     @extend .py-5;
     background: $black-transparent;
+
     a {
         @extend .p-3;
         @extend .rounded-5;
@@ -180,24 +205,16 @@ body {
         background: none;
         transition: background-color 0.5s ease-in-out;
     }
+
     a:hover {
         background: $black-transparent;
     }
+
     div.map-frame {
         @extend.mx-auto;
         @extend.mx-lg-5;
         @extend.d-block;
         width: 400px;
         height: 300px;
-    }
-}
-
-@include media-breakpoint-down(lg) {
-    body {
-        font-size: 1rem;
-    }
-    .custom-reactive-contact-container div.map-frame {
-        width: 95%;
-        height: 100%;
     }
 }

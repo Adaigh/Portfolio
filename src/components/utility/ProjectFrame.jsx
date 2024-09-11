@@ -14,7 +14,7 @@ const ProjectFrame = ({ description, bullets, slides }) => {
     return (
         <div className="d-flex flex-column-reverse flex-xl-row gap-3 py-5 align-items-center">
             <div className="mx-auto w-xl-50">
-                <ul className="project-list" >
+                <ul>
                     {description.map((entry, index) => {
                         if (entry.match(/<r>/)) {
                             entry = entry.replace(/<r>/, "<span class='red-text'>")
