@@ -1,0 +1,53 @@
+$white-transparent:rgba(255, 255, 255, 0.3);
+$fully-transparent:rgba(0, 0, 0, 0);
+
+// Define bootstrap variable overrides
+$carousel-transition-duration: 1.5s;
+$carousel-transition: transform $carousel-transition-duration ease-in-out;
+$accordion-bg: $white-transparent;
+$accordion-button-active-bg: $fully-transparent;
+$accordion-button-active-color: $fully-transparent;
+$accordion-button-focus-box-shadow: none;
+$accordion-border-width: 0;
+$card-bg: $white-transparent;
+
+// Import bootstrap
+@import "bootstrap/scss/bootstrap";
+
+// Modify responsive behaviors where needed
+$utilities: map-merge($utilities,
+        ("width": (property: width,
+                class: w,
+                responsive: true,
+                values: (250p: 250px, 50: 50%, 75: 75%, 100: 100%, fc: fit-content, mc: max-content)),
+            "height": (property: height,
+                class: h,
+                responsive: true,
+                values: (500p: 500px)),
+            "top": (property: top,
+                responsive: true,
+                values: (10: 10px, 50: 50px)),
+            "max-height": (property: max-height,
+                class: mh,
+                values: (350p: 350px, un: unset)),
+            'max-width': (property: max-width,
+                class: mw,
+                values: (500p: 500px, 550p: 550px, 1300p: 1300px)),
+        ));
+
+// Import the utilities api to merge responsive modifications
+@import "bootstrap/scss/utilities/api";
+
+// Adjust scroll settings for mobile to mitigate menu overlapping
+div {
+    scroll-margin-top: -15vh;
+}
+
+@include media-breakpoint-down(md) {
+    div {
+        scroll-margin-top: 120px;
+    }
+}
+
+// Importing custom styling
+@import "./styles/custom";

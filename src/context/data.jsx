@@ -5,6 +5,10 @@ export const data = {
         brandText: "AJD",
         links: [
             {
+                text: "Demos",
+                ref: "#Demonstrations"
+            },
+            {
                 text: "Projects",
                 ref: "#Projects"
             },
