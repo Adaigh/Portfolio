@@ -68,6 +68,15 @@ li {
     color: $lightRed;
 }
 
+.project-button-bg {
+    background-color: $white-transparent;
+
+    :hover {
+        background-color: $black-transparent;
+        transition: background-color 0.5s ease-in;
+    }
+}
+
 .red-text {
     color: $red;
 }
@@ -88,15 +97,19 @@ li {
     margin: 25px;
 }
 
-// Augmenting boostrap classes
-.carousel-caption {
-    position: relative;
-    bottom: unset;
-    left: unset;
-    right: unset;
-    text-shadow: none;
+// Custom transition
+.shrink {
+    display: block;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .3s linear;
 }
 
+.shrink.active {
+    max-height: 1000px;
+}
+
+// Augmenting boostrap classes
 .navbar {
     z-index: $zindex-fixed;
 }
@@ -111,7 +124,8 @@ li {
         font-size: 0.8rem;
     }
 
-    .bold-header, .spaced-header{
+    .bold-header,
+    .spaced-header {
         font-size: 1.4rem;
     }
 
