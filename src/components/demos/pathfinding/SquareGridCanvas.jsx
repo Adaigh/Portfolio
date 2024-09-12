@@ -160,15 +160,15 @@ export const SquareGridCanvas = ({ grid, method }) => {
                     >
                         <ul>
                             <li>This is a demonstration of the A* pathfinding algorithm</li>
-                            <li>The heuristic used is the distance^2 to magnify the effect</li>
+                            <li>The heuristic used is the standard point-distance function</li>
                             <li>This version explores the 2D grid in four directions (NSEW)</li>
                             <li>- Barrier cells are drawn in <span style={{ color: `rgb(${colors[1][0]}, ${colors[1][1]}, ${colors[1][2]})` }}>Black</span></li>
                             <li>- Start cell is drawn in <span style={{ color: `rgb(${colors[2][0]}, ${colors[2][1]}, ${colors[2][2]})` }}>Blue</span></li>
                             <li>- End cell is drawn in <span style={{ color: `rgb(${colors[3][0]}, ${colors[3][1]}, ${colors[3][2]})` }}>Green</span></li>
                             <li>- Cells being analyzed are <span style={{ color: `rgb(${animationColors['analyzing'][0]}, ${animationColors['analyzing'][1]}, ${animationColors['analyzing'][2]})` }}>Red</span></li>
                             <li>- Cells on the heap are <span style={{ color: `rgb(${animationColors['heaped'][0]}, ${animationColors['heaped'][1]}, ${animationColors['heaped'][2]})` }}>Dark Red</span></li>
-                            <li>- Cells found in backtracking are <span style={{ color: `rgb(${animationColors['back'][0]}, ${animationColors['back'][1]}, ${animationColors['back'][2]})` }}>Dark Blue</span></li>
-                            <li>- Cells on the final path are <span style={{ color: `rgb(${animationColors['path'][0]}, ${animationColors['path'][1]}, ${animationColors['path'][2]})` }}>Blue</span></li>
+                            <li>- Cells found in backtracking are <span style={{ color: `rgb(${animationColors['back'][0]}, ${animationColors['back'][1]}, ${animationColors['back'][2]})` }}>Dark Teal</span></li>
+                            <li>- Cells on the final path are <span style={{ color: `rgb(${animationColors['path'][0]}, ${animationColors['path'][1]}, ${animationColors['path'][2]})` }}>Teal</span></li>
                             {/* <li>Use the following controls to draw on the grid:</li> */}
                         </ul>
                     </Controls>
