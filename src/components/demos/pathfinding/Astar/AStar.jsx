@@ -104,7 +104,7 @@ const AStar = () => {
                     // Calculating new data
                     let newPathLength = ancestors[x][y].pathLength + 1.0
                     // Using point-distance as heuristic function
-                    let newDistance = ((end[0] - new_x) ** 2 + (end[1] - new_y) ** 2)
+                    let newDistance = ((end[0] - new_x) ** 2 + (end[1] - new_y) ** 2) ** 0.5 
                     let newWeight = newPathLength + newDistance
 
                     // Checking for end cell
