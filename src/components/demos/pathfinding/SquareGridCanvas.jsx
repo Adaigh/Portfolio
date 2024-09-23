@@ -4,7 +4,7 @@ import { useCreateGrid } from "../utility/useCreateGrid"
 
 const breakpoint = 1200
 
-export const SquareGridCanvas = ({ grid, method }) => {
+export const SquareGridCanvas = ({ grid, method, children }) => {
 
     const colors = [[150, 150, 150], [0, 0, 0], [50, 50, 200], [50, 200, 50]]
     const animationColors = {
@@ -142,6 +142,7 @@ export const SquareGridCanvas = ({ grid, method }) => {
             }
             let nextStep = animationSequence.shift()
             let stepColor = animationColors[nextStep.step]
+            if(nextStep.step == "analyzing")console.log(nextStep)
             roundedSquare(nextStep.x, nextStep.y, stepColor)
         }
     }
@@ -159,9 +160,12 @@ export const SquareGridCanvas = ({ grid, method }) => {
                         clearfunc={clearGrid}
                     >
                         <ul>
-                            <li>This is a demonstration of the A* pathfinding algorithm</li>
+                            {children.map((x)=>{
+                                return <li>{x}</li>
+                            })}
+                            {/* <li>This is a demonstration of the A* pathfinding algorithm</li>
                             <li>The heuristic used is the standard point-distance function</li>
-                            <li>This version explores the 2D grid in four directions (NSEW)</li>
+                            <li>This version explores the 2D grid in four directions (NSEW)</li> */}
                             <li>- Barrier cells are drawn in <span style={{ color: `rgb(${colors[1][0]}, ${colors[1][1]}, ${colors[1][2]})` }}>Black</span></li>
                             <li>- Start cell is drawn in <span style={{ color: `rgb(${colors[2][0]}, ${colors[2][1]}, ${colors[2][2]})` }}>Blue</span></li>
                             <li>- End cell is drawn in <span style={{ color: `rgb(${colors[3][0]}, ${colors[3][1]}, ${colors[3][2]})` }}>Green</span></li>

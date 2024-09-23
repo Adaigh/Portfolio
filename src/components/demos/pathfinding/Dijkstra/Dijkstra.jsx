@@ -1,15 +1,14 @@
 import { useCallback } from "react";
 import { SquareGridCanvas } from "../SquareGridCanvas";
 import { Heap } from 'heap-js'
-import { useSiteContext } from "../../../../context/SiteContext";
 import ErrorMessage from "../../../ui/ErrorMessage";
+import { useSiteContext } from "../../../../context/SiteContext";
 
-const AStar = () => {
+const Dijkstra = () => {
 
-    const { astar } = {...useSiteContext().demos}
+    const { dijkstra } = {...useSiteContext().demos}
 
-
-    const aStarPathfinder = useCallback((grid, start, end) => {
+    const dijkstraPathfinder = useCallback((grid, start, end) => {
 
         // Stores data for each step in that the algorithm takes
         class SequenceStep {
@@ -22,8 +21,8 @@ const AStar = () => {
 
         // Records to be sorted via heap
         class HeapEntry {
-            constructor(weight, x, y) {
-                this.weight = weight;
+            constructor(cost, x, y) {
+                this.cost = cost;
                 this.x = x
                 this.y = y
             }
@@ -31,10 +30,8 @@ const AStar = () => {
 
         // Memoization grid to record values and coordinates
         class AncestorCell {
-            constructor(weight, pathLength, distance, px, py) {
-                this.weight = weight;
-                this.pathLength = pathLength;
-                this.distance = distance;
+            constructor(cost, px, py) {
+                this.cost = cost;
                 this.px = px;
                 this.py = py;
             }
@@ -62,12 +59,12 @@ const AStar = () => {
             return backPath.concat(path)
         }
 
-        // Initialize Astar parameters
+        // Initialize Dijkstra parameters
         let found = false
         let sequence = []
 
         // Heap init
-        const customComparator = (a, b) => a.weight - b.weight;
+        const customComparator = (a, b) => a.cost - b.cost;
         let heap = new Heap(customComparator)
         heap.push(new HeapEntry(0, start[0], start[1]))
 
@@ -81,51 +78,39 @@ const AStar = () => {
             ancestors.push(new Array())
             visited.push(new Array())
             for (let j = 0; j < grid.length; j++) {
-                ancestors[i].push(new AncestorCell(Number.MAX_SAFE_INTEGER, Number.MAX_SAFE_INTEGER, 0, null, null))
+                ancestors[i].push(new AncestorCell(Number.MAX_SAFE_INTEGER, null, null))
                 visited[i].push(false)
             }
         }
-        ancestors[start[0]][start[1]] = new AncestorCell(0, 0, 0, null, null)
+        ancestors[start[0]][start[1]] = new AncestorCell(0, null, null)
 
-        // Explore Astar grid
+        // Explore Dijkstra grid
         while (heap.length > 0 && !found) {
+            let { cost, x, y } = heap.pop()
 
-            // Pop the 'lightest' weight, record as visited
-            let { weight, x, y } = heap.pop()
+            if (visited[x][y]) continue
+
             visited[x][y] = true
             sequence.push(new SequenceStep(x, y, "analyzing"))
-
-            // Check all neighbors
+            
+            let new_cost = cost + 1;
+            
             for (let dir of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
                 let new_x = x + dir[0]
                 let new_y = y + dir[1]
-
-                // Bounds check + barrier check + visited check
                 if (new_x >= 0 && new_x < grid.length && new_y >= 0 && new_y < grid.length) {
                     if (grid[new_x][new_y] == 1) continue
                     if (visited[new_x][new_y]) continue
-
-                    // Calculating new data
-                    let newPathLength = ancestors[x][y].pathLength + 1.0
-                    // Using point-distance as heuristic function
-                    let newDistance = ((end[0] - new_x) ** 2 + (end[1] - new_y) ** 2) ** 0.5
-                    let newWeight = newPathLength + newDistance
-
-                    // Checking for end cell
                     if (new_x == end[0] && new_y == end[1]) {
-                        ancestors[new_x][new_y] = new AncestorCell(newWeight, newPathLength, newDistance, x, y)
+                        ancestors[new_x][new_y] = new AncestorCell(new_cost, x, y)
                         found = true
                         let backtracking = backtrack(ancestors)
                         return sequence.concat(backtracking)
                     }
                     else {
-
-                        // Only push to the heap if it's a shorter path
-                        if (ancestors[new_x][new_y].weight > newWeight) {
-                            ancestors[new_x][new_y] = new AncestorCell(newWeight, newPathLength, newDistance, x, y)
-                            heap.push(new HeapEntry(newWeight, new_x, new_y))
-                            sequence.push(new SequenceStep(new_x, new_y, "heaped"))
-                        }
+                        ancestors[new_x][new_y] = new AncestorCell(new_cost, x, y)
+                        heap.push(new HeapEntry(new_cost, new_x, new_y))
+                        sequence.push(new SequenceStep(new_x, new_y, "heaped"))
                     }
                 }
             }
@@ -138,19 +123,18 @@ const AStar = () => {
         }
     }, [])
 
-
-    if (astar) {
+    if (dijkstra) {
         return (
             <>
-                <h1 className="p-3">{astar.title}</h1>
-                <SquareGridCanvas method={aStarPathfinder} >
-                    {astar.description}
+                <h1 className="p-3">{dijkstra.title}</h1>
+                <SquareGridCanvas method={dijkstraPathfinder}>
+                    {dijkstra.description}
                 </SquareGridCanvas>
             </>
         )
     }
 
-    return <ErrorMessage string={"There was an error loading ASTAR data"} />
+    return <ErrorMessage string={"There was an error loading DIJKSTRA data"} />
 }
 
-export default AStar
+export default Dijkstra
