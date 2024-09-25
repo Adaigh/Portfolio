@@ -30,7 +30,6 @@ function backtrack(ancestors, start, end) {
 export const useAStar = () => {
     const aStarPathfinder = (grid, start, end) => {
         
-        // console.log("ASTAR", grid, start, end)
         // Initialize AStar parameters
         let found = false
         let sequence = []
@@ -101,8 +100,7 @@ export const useAStar = () => {
 
         // Delivers a sequence that turns start and end red if not found.
         if (!found) {
-            // console.log("Not found")
-            return [new SequenceStep(start[0], start[1], "analyzing"), new SequenceStep(end[0], end[1], "analyzing")]
+            return []
         }
     }
     return { aStarPathfinder }
@@ -135,7 +133,6 @@ export const useDijkstra = () => {
 
         // Explore Dijkstra grid
         while (heap.length > 0 && !found) {
-            // console.log(heap)
             let { cost, x, y } = heap.pop()
 
             if (visited[x][y]) continue
@@ -170,8 +167,7 @@ export const useDijkstra = () => {
 
         // Delivers a sequence that turns start and end red if not found.
         if (!found) {
-            // console.log("Not found")
-            return [new SequenceStep(start[0], start[1], "analyzing"), new SequenceStep(end[0], end[1], "analyzing")]
+            return []
         }
     }
     return { dijkstraPathfinder }

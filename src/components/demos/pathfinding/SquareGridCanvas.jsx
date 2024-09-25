@@ -2,6 +2,7 @@ import { ReactP5Wrapper } from "@p5-wrapper/react"
 import { useEffect, useRef, useState } from "react"
 import { useCreateGrid } from "../utility/useCreateGrid"
 import ErrorMessage from "../../ui/ErrorMessage"
+import { SequenceStep } from "../utility/classes"
 
 
 export const SquareGridCanvas = ({ inGrid, gridUpdate, method, children }) => {
@@ -16,37 +17,55 @@ export const SquareGridCanvas = ({ inGrid, gridUpdate, method, children }) => {
         'analyzing': [250, 0, 0],
         'heaped': [150, 0, 0],
         'back': [50, 150, 150],
-        'path': [100, 200, 200]
+        'path': [100, 200, 200],
+        'start': [50, 50, 200],
+        'end': [50, 200, 50]
     }
+    let step = 30
+    let pad = 2
     let thisCanvas = {}
     let start = [null, null]
     let end = [null, null]
     let animationSequence = []
-    let step = 30;
     let currentGrid = JSON.parse(JSON.stringify(inGrid));
     let found = false;
 
     // Functions for grid controls
     function playAnimation() {
+
+        // Generate animation sequence
         animationSequence = method(inGrid, start, end)
-        if (animationSequence.length > 2) found = true;
+
+        // Adjustments for start/end based on path existence
+        if (animationSequence.length > 0) {
+            // Re-marking start and end colors after animation
+            animationSequence.push(new SequenceStep(start[0], start[1], 'start'))
+            animationSequence.push(new SequenceStep(end[0], end[1], 'end'))
+        } else {
+            // Marks start/end red if not found
+            animationSequence.push(new SequenceStep(start[0], start[1], 'analyzing'))
+            animationSequence.push(new SequenceStep(end[0], end[1], 'analyzing'))
+        }
+
+        // Trigger the draw() loop
         thisCanvas.loop()
     }
 
     function clearGrid() {
+        // Sets grid to a blank grid
         gridUpdate(createGrid(inGrid.length))
     }
 
-    // P5.js sketch function
+    // P5.js sketch function, for canvas control
     function sketch(p5) {
-        thisCanvas = p5
-        let pad = 2
 
+        // Helper function to draw rounded squares on canvas
         function roundedSquare(x, y, fillColor) {
             p5.fill(fillColor[0], fillColor[1], fillColor[2])
             return p5.square(x * step + pad, y * step + pad, (step - (2 * pad)), 3)
         }
 
+        // Draws the grid via reference, records start/end coords
         function drawGrid() {
             p5.fill(150)
             p5.noStroke()
@@ -59,23 +78,27 @@ export const SquareGridCanvas = ({ inGrid, gridUpdate, method, children }) => {
             }
         }
 
+        // Creates the canvas, links thisCanvas for external function calls
         p5.setup = () => {
+            thisCanvas = p5
             p5.createCanvas(inGrid.length * step, inGrid.length * step)
             drawGrid()
             p5.noLoop()
         }
 
+        // Trigger setup when props are updated
         p5.updateWithProps = () => {
             p5.setup()
         }
 
-        function interact(update) {
+        // Handling grid interactions
+        function interact() {
             return () => {
 
                 // Guard to protect against out-of-canvas clicks
                 if (p5.mouseX == 0 && p5.mouseY == 0) return
 
-                // Retrieve mouse coords
+                // Retrieve/discretize mouse coords
                 let loc_x = Math.floor(p5.mouseX / step)
                 let loc_y = Math.floor(p5.mouseY / step)
 
@@ -112,29 +135,27 @@ export const SquareGridCanvas = ({ inGrid, gridUpdate, method, children }) => {
                 // All modes update the current cell
                 currentGrid[loc_x][loc_y] = currentMode.current
                 roundedSquare(loc_x, loc_y, colors[currentMode.current])
-                if (update) gridUpdate(currentGrid)
             }
         }
 
         // Register interaction function to both click and drag
-        p5.mousePressed = interact(false)
-        p5.mouseDragged = interact(false)
+        // sends updates to parent on mouse-release
+        p5.mousePressed = interact()
+        p5.mouseDragged = interact()
         p5.mouseReleased = () => {
             gridUpdate(currentGrid)
         }
 
+        // Loop to process the animation sequence
         p5.draw = () => {
             if (animationSequence.length === 0) {
-                if (found) {
-                    roundedSquare(start[0], start[1], colors[2])
-                    roundedSquare(end[0], end[1], colors[3])
-                }
                 p5.noLoop()
                 return
+            } else {
+                let nextStep = animationSequence.shift()
+                let stepColor = animationColors[nextStep.step]
+                roundedSquare(nextStep.x, nextStep.y, stepColor)
             }
-            let nextStep = animationSequence.shift()
-            let stepColor = animationColors[nextStep.step]
-            roundedSquare(nextStep.x, nextStep.y, stepColor)
         }
     }
 

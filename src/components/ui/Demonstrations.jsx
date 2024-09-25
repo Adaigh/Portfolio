@@ -1,4 +1,4 @@
-import { forwardRef, lazy, Suspense, useEffect, useRef, useState } from "react"
+import { lazy, Suspense, useState } from "react"
 import SectionHeader from "../utility/SectionHeader"
 import { useSiteContext } from "../../context/SiteContext"
 import ErrorMessage from "./ErrorMessage"
@@ -23,23 +23,10 @@ const Demonstrations = () => {
     const funcs = [dijkstraPathfinder, aStarPathfinder]
     const breakpoint = 1200
 
-
-    // useEffect(() => {
-    //     window.innerWidth > breakpoint ? setWidth(20) : setWidth(10)
-    // }, [])
-
     const updateWidth = (val) => {
         setWidth(val)
         setDemoGrid(createGrid(val))
     }
-
-    // console.log(demoGrid)
-
-    // const LinkedGrid = forwardRef((props, demoGrid) => {
-    //     <SquareGridCanvas inGrid={demoGrid} {...props}>
-    //         {showInd == 0 ? demos.dijkstra.description : demos.astar.description}
-    //     </SquareGridCanvas>
-    // })
 
     const updateShow = (e) => {
         e.preventDefault()
@@ -86,7 +73,6 @@ const Demonstrations = () => {
                         <SquareGridCanvas inGrid={demoGrid} gridUpdate={setDemoGrid} method={funcs[showInd]}>
                             {showInd == 0 ? demos.dijkstra.description : demos.astar.description}
                         </SquareGridCanvas>
-                        {/* <LinkedGrid method={funcs[showInd]}/> */}
                     </Suspense>
                 </>
                 }
