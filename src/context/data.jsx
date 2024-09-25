@@ -50,7 +50,7 @@ export const data = {
             title: "Demonstrations",
             message: [
                 "This section contains demonstrations for various programming concepts",
-                "To begin, I've created a visualization of the A* pathfinding algorithm",
+                "To begin, I've created visualizations of Dijkstra's and the A* pathfinding algorithm",
                 "These take advantage of client-side rendering, all the magic happens on your machine!",
                 "For performance, these demonstartions won't load until you click the button"
             ]
@@ -59,8 +59,7 @@ export const data = {
             title: "A* Pathfinding animation",
             description: [
                 "This is a demonstration of the A* pathfinding algorithm",
-                "It finds the shortest path while minimizing analysis steps",
-                "It weighs neighbor cells by path length and est. remaining distance",
+                "It finds the shortest path by path length and est. remaining distance",
                 "The heuristic used is the standard point-distance function",
                 "This version explores the 2D grid in four directions (NSEW)"
             ]
