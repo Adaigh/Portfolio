@@ -1,94 +1,109 @@
 import { ReactP5Wrapper } from "@p5-wrapper/react"
 import { useEffect, useRef, useState } from "react"
 import { useCreateGrid } from "../utility/useCreateGrid"
+import ErrorMessage from "../../ui/ErrorMessage"
+import { SequenceStep } from "../utility/classes"
 
-const breakpoint = 1200
 
-export const SquareGridCanvas = ({ grid, method }) => {
+export const SquareGridCanvas = ({ inGrid, gridUpdate, method, children }) => {
 
+    // React-lifecycle variables
+    const currentMode = useRef(1)
+    const { createGrid } = useCreateGrid()
+
+    // Non-React variables
     const colors = [[150, 150, 150], [0, 0, 0], [50, 50, 200], [50, 200, 50]]
     const animationColors = {
         'analyzing': [250, 0, 0],
         'heaped': [150, 0, 0],
         'back': [50, 150, 150],
-        'path': [100, 200, 200]
+        'path': [100, 200, 200],
+        'start': [50, 50, 200],
+        'end': [50, 200, 50]
     }
-
-    const [width, setWidth] = useState(10)
-    const currentMode = useRef(1)
-
-    const { createGrid } = useCreateGrid()
-
-    useEffect(() => {
-        const monitorBreakpoint = () => {
-            window.innerWidth > breakpoint ? setWidth(20) : setWidth(10)
-        }
-        monitorBreakpoint()
-        window.addEventListener('resize', monitorBreakpoint)
-        return () => window.removeEventListener('resize', monitorBreakpoint)
-    }, [])
-
+    let step = 30
+    let pad = 2
     let thisCanvas = {}
     let start = [null, null]
     let end = [null, null]
     let animationSequence = []
+    let currentGrid = JSON.parse(JSON.stringify(inGrid));
 
+    // Functions for grid controls
     function playAnimation() {
-        thisCanvas.setup()
-        animationSequence = method(grid, start, end)
+
+        // Generate animation sequence
+        animationSequence = method(inGrid, start, end)
+
+        // Adjustments for start/end based on path existence
+        if (animationSequence.length > 0) {
+            // Re-marking start and end colors after animation
+            animationSequence.push(new SequenceStep(start[0], start[1], 'start'))
+            animationSequence.push(new SequenceStep(end[0], end[1], 'end'))
+        } else {
+            // Marks start/end red if not found
+            animationSequence.push(new SequenceStep(start[0], start[1], 'analyzing'))
+            animationSequence.push(new SequenceStep(end[0], end[1], 'analyzing'))
+        }
+
+        // Trigger the draw() loop
         thisCanvas.loop()
     }
 
     function clearGrid() {
-        let n = width
-        grid = createGrid(n)
-        thisCanvas.setup()
+        // Sets grid to a blank grid
+        gridUpdate(createGrid(inGrid.length))
     }
 
+    // P5.js sketch function, for canvas control
     function sketch(p5) {
-        thisCanvas = p5
-        let n = 0
-        let step = 30
-        let pad = 2
 
+        // Helper function to draw rounded squares on canvas
         function roundedSquare(x, y, fillColor) {
             p5.fill(fillColor[0], fillColor[1], fillColor[2])
             return p5.square(x * step + pad, y * step + pad, (step - (2 * pad)), 3)
         }
 
-        p5.setup = () => {
-            p5.createCanvas(n * step, n * step)
+        // Draws the grid via reference, records start/end coords
+        function drawGrid() {
             p5.fill(150)
             p5.noStroke()
-            for (let row in grid) {
-                for (let col in grid[row]) {
-                    roundedSquare(row, col, colors[grid[row][col]])
+            for (let row in inGrid) {
+                for (let col in inGrid[row]) {
+                    roundedSquare(row, col, colors[inGrid[row][col]])
+                    if (inGrid[row][col] == 2) start = [parseInt(row), parseInt(col)]
+                    if (inGrid[row][col] == 3) end = [parseInt(row), parseInt(col)]
                 }
             }
+        }
+
+        // Creates the canvas, links thisCanvas for external function calls
+        p5.setup = () => {
+            thisCanvas = p5
+            p5.createCanvas(inGrid.length * step, inGrid.length * step)
+            drawGrid()
             p5.noLoop()
         }
 
+        // Trigger setup when props are updated
         p5.updateWithProps = () => {
-            if (!grid) {
-                n = width
-                grid = createGrid(n)
-            }
-            else {
-                n = grid.length
-            }
             p5.setup()
         }
 
+        // Handling grid interactions
         function interact() {
             return () => {
 
-                // Retrieve mouse coords
+                // Guard to protect against out-of-canvas clicks
+                if (p5.mouseX == 0 && p5.mouseY == 0) return
+
+                // Retrieve/discretize mouse coords
                 let loc_x = Math.floor(p5.mouseX / step)
                 let loc_y = Math.floor(p5.mouseY / step)
 
                 // Validation
-                if (loc_x < 0 || loc_x >= n || loc_y < 0 || loc_y >= n) return
-                if (grid[loc_x][loc_y] === currentMode.current) return
+                if (loc_x < 0 || loc_x >= currentGrid.length || loc_y < 0 || loc_y >= currentGrid.length) return
+                if (currentGrid[loc_x][loc_y] === currentMode.current) return
 
                 // Erase and Barrier mode reset the start or endpoints if clicked
                 if (currentMode.current === 0 || currentMode.current === 1) {
@@ -103,9 +118,7 @@ export const SquareGridCanvas = ({ grid, method }) => {
                 // Start mode updates the start position
                 if (currentMode.current === 2) {
                     if (start[0] !== null) {
-                        grid[start[0]][start[1]] = 0
-                        p5.fill(150)
-                        roundedSquare(start[0], start[1], colors[0])
+                        currentGrid[start[0]][start[1]] = 0
                     }
                     start = [loc_x, loc_y]
                 }
@@ -113,73 +126,75 @@ export const SquareGridCanvas = ({ grid, method }) => {
                 // End mode updates the end position
                 if (currentMode.current === 3) {
                     if (end[0] !== null) {
-                        grid[end[0]][end[1]] = 0
-                        p5.fill(150)
-                        roundedSquare(end[0], end[1], colors[0])
+                        currentGrid[end[0]][end[1]] = 0
                     }
                     end = [loc_x, loc_y]
                 }
 
                 // All modes update the current cell
-                grid[loc_x][loc_y] = currentMode.current
+                currentGrid[loc_x][loc_y] = currentMode.current
                 roundedSquare(loc_x, loc_y, colors[currentMode.current])
             }
         }
 
         // Register interaction function to both click and drag
-        p5.mouseDragged = interact()
+        // sends updates to parent on mouse-release
         p5.mousePressed = interact()
+        p5.mouseDragged = interact()
+        p5.mouseReleased = () => {
+            gridUpdate(currentGrid)
+        }
 
-
+        // Loop to process the animation sequence
         p5.draw = () => {
-            if (animationSequence.length == 0) {
-                let startColor = colors[2]
-                roundedSquare(start[0], start[1], startColor)
-                let endColor = colors[3]
-                roundedSquare(end[0], end[1], endColor)
+            if (animationSequence.length === 0) {
                 p5.noLoop()
                 return
+            } else {
+                let nextStep = animationSequence.shift()
+                let stepColor = animationColors[nextStep.step]
+                roundedSquare(nextStep.x, nextStep.y, stepColor)
             }
-            let nextStep = animationSequence.shift()
-            let stepColor = animationColors[nextStep.step]
-            roundedSquare(nextStep.x, nextStep.y, stepColor)
         }
     }
 
-    return (
-        <>
-            <div>
-                <div className="d-flex flex-column flex-md-row px-3 gap-3 align-items-center justify-content-around">
+    // React component return
+    if (inGrid) {
+        return (
+            <>
+                <div>
+                    <div className="d-flex flex-column flex-md-row px-3 gap-3 align-items-center justify-content-around">
 
-                    <Controls
-                        currentMode={currentMode}
-                        n={width}
-                        updateN={setWidth}
-                        playfunc={playAnimation}
-                        clearfunc={clearGrid}
-                    >
-                        <ul>
-                            <li>This is a demonstration of the A* pathfinding algorithm</li>
-                            <li>The heuristic used is the standard point-distance function</li>
-                            <li>This version explores the 2D grid in four directions (NSEW)</li>
-                            <li>- Barrier cells are drawn in <span style={{ color: `rgb(${colors[1][0]}, ${colors[1][1]}, ${colors[1][2]})` }}>Black</span></li>
-                            <li>- Start cell is drawn in <span style={{ color: `rgb(${colors[2][0]}, ${colors[2][1]}, ${colors[2][2]})` }}>Blue</span></li>
-                            <li>- End cell is drawn in <span style={{ color: `rgb(${colors[3][0]}, ${colors[3][1]}, ${colors[3][2]})` }}>Green</span></li>
-                            <li>- Cells being analyzed are <span style={{ color: `rgb(${animationColors['analyzing'][0]}, ${animationColors['analyzing'][1]}, ${animationColors['analyzing'][2]})` }}>Red</span></li>
-                            <li>- Cells on the heap are <span style={{ color: `rgb(${animationColors['heaped'][0]}, ${animationColors['heaped'][1]}, ${animationColors['heaped'][2]})` }}>Dark Red</span></li>
-                            <li>- Cells found in backtracking are <span style={{ color: `rgb(${animationColors['back'][0]}, ${animationColors['back'][1]}, ${animationColors['back'][2]})` }}>Dark Teal</span></li>
-                            <li>- Cells on the final path are <span style={{ color: `rgb(${animationColors['path'][0]}, ${animationColors['path'][1]}, ${animationColors['path'][2]})` }}>Teal</span></li>
-                            {/* <li>Use the following controls to draw on the grid:</li> */}
-                        </ul>
-                    </Controls>
-                    <ReactP5Wrapper sketch={sketch} />
+                        <Controls
+                            currentMode={currentMode}
+                            playfunc={playAnimation}
+                            clearfunc={clearGrid}
+                        >
+                            <ul>
+                                {children.map((x, idx) => {
+                                    return <li key={idx}>{x}</li>
+                                })}
+                                <li>- Barrier cells are drawn in <span style={{ color: `rgb(${colors[1][0]}, ${colors[1][1]}, ${colors[1][2]})` }}>Black</span></li>
+                                <li>- Start cell is drawn in <span style={{ color: `rgb(${colors[2][0]}, ${colors[2][1]}, ${colors[2][2]})` }}>Blue</span></li>
+                                <li>- End cell is drawn in <span style={{ color: `rgb(${colors[3][0]}, ${colors[3][1]}, ${colors[3][2]})` }}>Green</span></li>
+                                <li>- Cells being analyzed are <span style={{ color: `rgb(${animationColors['analyzing'][0]}, ${animationColors['analyzing'][1]}, ${animationColors['analyzing'][2]})` }}>Red</span></li>
+                                <li>- Cells on the heap are <span style={{ color: `rgb(${animationColors['heaped'][0]}, ${animationColors['heaped'][1]}, ${animationColors['heaped'][2]})` }}>Dark Red</span></li>
+                                <li>- Cells found in backtracking are <span style={{ color: `rgb(${animationColors['back'][0]}, ${animationColors['back'][1]}, ${animationColors['back'][2]})` }}>Dark Teal</span></li>
+                                <li>- Cells on the final path are <span style={{ color: `rgb(${animationColors['path'][0]}, ${animationColors['path'][1]}, ${animationColors['path'][2]})` }}>Teal</span></li>
+                            </ul>
+                        </Controls>
+                        <ReactP5Wrapper sketch={sketch} />
+                    </div>
                 </div>
-            </div>
-        </>
-    )
+            </>
+        )
+    }
+    else {
+        return <ErrorMessage string={"There was an error loading the canvas"} />
+    }
 }
 
-export const Controls = ({ currentMode, n, updateN, playfunc, clearfunc, children }) => {
+export const Controls = ({ currentMode, playfunc, clearfunc, children }) => {
 
     const modes = ['erase', 'barrier', 'start', 'end']
 
@@ -198,9 +213,8 @@ export const Controls = ({ currentMode, n, updateN, playfunc, clearfunc, childre
     return (
         <div className="">
             {children}
-            <div className="p-2 rounded bg-secondary-subtle">
-                <label htmlFor="widthSlider" className="form-label d-block">Grid width {n}</label>
-                <input type="range" className="form-range" id="widthSlider" min={5} max={window.innerWidth > breakpoint ? 20 : 10} onChange={(e) => updateN(e.target.value)} value={n}></input>
+            <div className="p-2 rounded light-bg">
+
                 <div>
                     <span>Click Mode: </span>
                     <div className="form-check">

@@ -12,9 +12,3 @@ export const useCreateGrid = () => {
     }
     return {createGrid}
 }
-
-// export const useTemplateGrid = () => {
-//     const templateGrid = (seed) => {
-//         if ()
-//     }
-// }

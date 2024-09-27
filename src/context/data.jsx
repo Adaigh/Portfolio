@@ -45,8 +45,39 @@ export const data = {
         }
     },
 
+    demos: {
+        header: {
+            title: "Demonstrations",
+            message: [
+                "This section contains demonstrations for various programming concepts",
+                "To begin, I've created visualizations of Dijkstra's and the A* pathfinding algorithm",
+                "These take advantage of client-side rendering, all the magic happens on your machine!",
+                "For performance, these demonstartions won't load until you click the button"
+            ]
+        },
+        astar: {
+            title: "A* Pathfinding animation",
+            description: [
+                "This is a demonstration of the A* pathfinding algorithm",
+                "It finds the shortest path by path length and est. remaining distance",
+                "The heuristic used is the standard point-distance function",
+                "This version explores the 2D grid in four directions (NSEW)"
+            ]
+        },
+        dijkstra: {
+            title: "Dijkstra's Pathfinding animation",
+            description: [
+                "This is a demonstration of Dijsktra's pathfinding algorithm",
+                "The algorithm determines the shortest path to each cell",
+                "It does this for all neighbor cells until it finds the target cell",
+                "This version explores the grid in four directions (NSEW)"
+            ]
+        }
+
+    },
+
     project: {
-        header:{
+        header: {
             title: "Projects",
             message: [
                 "Here you can see some of the bigger projects I've been working on.",
@@ -138,7 +169,7 @@ export const data = {
     },
 
     resume: {
-        header:{
+        header: {
             title: "R&eacute;sum&eacute;",
             message: [
                 "Here are my educational accomplishments and recent employers.",
@@ -193,7 +224,7 @@ export const data = {
     },
 
     contact: {
-        header:{
+        header: {
             title: "Contact Information",
             message: [
                 "I'm currently located in Spokane, WA but am willing to relocate.",

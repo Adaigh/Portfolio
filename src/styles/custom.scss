@@ -60,6 +60,10 @@ li {
     color: $darkRed;
 }
 
+.light-bg {
+    background-color: $white-transparent;
+}
+
 .lightgreen-text {
     color: $lightGreen;
 }
@@ -69,7 +73,7 @@ li {
 }
 
 .project-button-bg {
-    background-color: $white-transparent;
+    @extend .light-bg;
 
     :hover {
         background-color: $black-transparent;
