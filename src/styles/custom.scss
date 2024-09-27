@@ -2,7 +2,7 @@
 $darkRed: #800;
 $lightRed: #d05;
 $lightGreen: #0c1;
-$bannerPad: min(30vh, 30vw);
+$bannerPad: min(15vh, 15vw);
 $black-transparent: rgba(0, 0, 0, 0.3);
 
 // Custom default styles
@@ -29,11 +29,16 @@ li {
 // Custom CSS classes
 .banner {
     padding-top: $bannerPad;
+    padding-bottom: $bannerPad;
     font-size: 1rem;
 }
 
+.banner:first-of-type {
+    padding-top: calc(1.5*$bannerPad);
+}
+
 .banner:last-of-type {
-    padding-bottom: $bannerPad;
+    padding-bottom: calc(1.5*$bannerPad);
 }
 
 .bold-header {
@@ -58,6 +63,10 @@ li {
 
 .darkred-text {
     color: $darkRed;
+}
+
+.home-container>div:nth-of-type(even){
+    background-color: $white-transparent;
 }
 
 .light-bg {
@@ -209,20 +218,21 @@ li {
     @extend .justify-content-center;
     @extend .gap-5;
     @extend .py-5;
-    background: $black-transparent;
+    background: $white-transparent;
 
     a {
         @extend .p-3;
         @extend .rounded-5;
-        @extend .text-light;
+        @extend .text-dark;
         font-weight: 300;
         text-shadow: none;
         text-decoration: none;
         background: none;
-        transition: background-color 0.5s ease-in-out;
+        transition: all 0.5s ease-in-out;
     }
 
     a:hover {
+        text-shadow: inherit;
         background: $black-transparent;
     }
 

@@ -7,13 +7,13 @@ import Resume from "../ui/Resume"
 const Home = () => {
 
     return (
-        <>
+        <div className="home-container">
         <Introduction />
         <Demonstrations />
         <Projects />
         <Resume />
         <Contact />
-        </>
+        </div>
     )
 }
 
