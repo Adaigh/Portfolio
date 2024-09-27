@@ -55,7 +55,7 @@ const Demonstrations = () => {
                         Load Demonstrations
                     </button>}
                     {show && <>
-                        <div className="d-flex light-bg gap-3 p-3 rounded w-50">
+                        <div className="d-flex light-bg gap-3 p-3 rounded w-lg-50">
                             <button
                                 onClick={(e) => changeIndex(e)}
                                 className="btn btn-primary"
@@ -65,7 +65,7 @@ const Demonstrations = () => {
                             </button>
 
                             <label htmlFor="widthSlider" className="form-label d-block">Grid width {width}</label>
-                            <input type="range" className="form-range w-50" id="widthSlider" min={5} max={window.innerWidth > breakpoint ? 20 : 10} onChange={(e) => updateWidth(e.target.value)} value={width}></input>
+                            <input type="range" className="form-range w-lg-50" id="widthSlider" min={5} max={window.innerWidth > breakpoint ? 20 : 10} onChange={(e) => updateWidth(e.target.value)} value={width}></input>
                         </div>
 
                         <Suspense fallback={<div style={{ textAlign: "center" }}><h1>Loading...</h1></div>}>
