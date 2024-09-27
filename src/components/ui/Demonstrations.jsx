@@ -42,41 +42,41 @@ const Demonstrations = () => {
 
     if (demos) {
         return (
-            <div id="Demonstrations" className="mx-auto mw-1300p banner">
+            <div id="Demonstrations" className="banner">
+                <div className="mx-auto mw-1300p">
+                    <SectionHeader
+                        title={demos.header.title}
+                        message={demos.header.message}
+                    />
 
-                <SectionHeader
-                    title={demos.header.title}
-                    message={demos.header.message}
-                />
+                    {!show && <button
+                        onClick={(e) => updateShow(e)}
+                        className="btn btn-primary d-block mx-auto">
+                        Load Demonstrations
+                    </button>}
+                    {show && <>
+                        <div className="d-flex light-bg gap-3 p-3 rounded w-50">
+                            <button
+                                onClick={(e) => changeIndex(e)}
+                                className="btn btn-primary"
+                                style={{ width: '180px' }}>
+                                {showInd == 0 && <>Switch to A*</>}
+                                {showInd == 1 && <>Switch to Dijkstra's</>}
+                            </button>
 
-                {!show && <button
-                    onClick={(e) => updateShow(e)}
-                    className="btn btn-primary d-block mx-auto">
-                    Load Demonstrations
-                </button>}
-                {show && <>
-                    <div className="d-flex light-bg gap-3 p-3 rounded w-50">
-                        <button
-                            onClick={(e) => changeIndex(e)}
-                            className="btn btn-primary"
-                            style={{width: '180px'}}>
-                            {showInd == 0 && <>Switch to A*</>}
-                            {showInd == 1 && <>Switch to Dijkstra's</>}
-                        </button>
+                            <label htmlFor="widthSlider" className="form-label d-block">Grid width {width}</label>
+                            <input type="range" className="form-range w-50" id="widthSlider" min={5} max={window.innerWidth > breakpoint ? 20 : 10} onChange={(e) => updateWidth(e.target.value)} value={width}></input>
+                        </div>
 
-                        <label htmlFor="widthSlider" className="form-label d-block">Grid width {width}</label>
-                        <input type="range" className="form-range w-50" id="widthSlider" min={5} max={window.innerWidth > breakpoint ? 20 : 10} onChange={(e) => updateWidth(e.target.value)} value={width}></input>
-                    </div>
-
-                    <Suspense fallback={<div style={{ textAlign: "center" }}><h1>Loading...</h1></div>}>
-                        <h1 className="p-3">{showInd == 0 ? demos.dijkstra.title : demos.astar.title}</h1>
-                        <SquareGridCanvas inGrid={demoGrid} gridUpdate={setDemoGrid} method={funcs[showInd]}>
-                            {showInd == 0 ? demos.dijkstra.description : demos.astar.description}
-                        </SquareGridCanvas>
-                    </Suspense>
-                </>
-                }
-
+                        <Suspense fallback={<div style={{ textAlign: "center" }}><h1>Loading...</h1></div>}>
+                            <h1 className="p-3">{showInd == 0 ? demos.dijkstra.title : demos.astar.title}</h1>
+                            <SquareGridCanvas inGrid={demoGrid} gridUpdate={setDemoGrid} method={funcs[showInd]}>
+                                {showInd == 0 ? demos.dijkstra.description : demos.astar.description}
+                            </SquareGridCanvas>
+                        </Suspense>
+                    </>
+                    }
+                </div>
             </div>
         )
     }
