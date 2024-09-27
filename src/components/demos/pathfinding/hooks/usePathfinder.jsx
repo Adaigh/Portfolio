@@ -98,7 +98,6 @@ export const useAStar = () => {
             }
         }
 
-        // Delivers a sequence that turns start and end red if not found.
         if (!found) {
             return []
         }
@@ -165,7 +164,6 @@ export const useDijkstra = () => {
             }
         }
 
-        // Delivers a sequence that turns start and end red if not found.
         if (!found) {
             return []
         }

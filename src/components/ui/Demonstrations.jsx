@@ -55,7 +55,7 @@ const Demonstrations = () => {
                     Load Demonstrations
                 </button>}
                 {show && <>
-                    <div className="d-flex bg-secondary gap-3 p-3 rounded w-50">
+                    <div className="d-flex light-bg gap-3 p-3 rounded w-50">
                         <button
                             onClick={(e) => changeIndex(e)}
                             className="btn btn-primary"

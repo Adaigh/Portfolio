@@ -28,7 +28,6 @@ export const SquareGridCanvas = ({ inGrid, gridUpdate, method, children }) => {
     let end = [null, null]
     let animationSequence = []
     let currentGrid = JSON.parse(JSON.stringify(inGrid));
-    let found = false;
 
     // Functions for grid controls
     function playAnimation() {
@@ -214,7 +213,7 @@ export const Controls = ({ currentMode, playfunc, clearfunc, children }) => {
     return (
         <div className="">
             {children}
-            <div className="p-2 rounded bg-secondary-subtle">
+            <div className="p-2 rounded light-bg">
 
                 <div>
                     <span>Click Mode: </span>
