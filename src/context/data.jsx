@@ -89,6 +89,25 @@ export const data = {
         projects: [
             {
                 title: {
+                    type: "text",
+                    text: "STMspokane.com (Call-To-Action)"
+                },
+                description: [
+                    "Updated single-page call-to-action site for STMspokane.com",
+                    "Refining the stm page to reduce scope and increase conversion rate"
+                ],
+                bullets: [
+                    "Vite (React/TS) using Bootstrap styling",
+                    "Optimized for SEO",
+                    "AWS S3 planned deployment",
+                    "DNS service by AWS Route 53"
+                ],
+                slides: [
+                    './stm_2025_1.jpg', './stm_2025_2.jpg', './stm_2025_3.jpg'
+                ],
+            },
+            {
+                title: {
                     type: "link",
                     text: "STMspokane.com (MERN)",
                     ref: "https://stmspokane.com/"
