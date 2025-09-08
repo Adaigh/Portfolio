@@ -1,4 +1,5 @@
 import { useCallback, useState } from "react"
+import FormatString from "./FormatString"
 
 const ProjectFrame = ({ description, bullets, slides }) => {
 
@@ -16,31 +17,23 @@ const ProjectFrame = ({ description, bullets, slides }) => {
             <div className="mx-auto w-xl-50">
                 <ul>
                     {description.map((entry, index) => {
-                        if (entry.match(/<r>/)) {
-                            entry = entry.replace(/<r>/, "<span class='red-text'>")
-                            entry = entry.replace(/<\/r>/, "</span>")
-                            return (
-                                <li key={`desc_${index}`} dangerouslySetInnerHTML={{ __html: entry }}>
-                                </li>
-                            )
-                        }
                         return (
                             <li key={`desc_${index}`}>
-                                {entry}
+                                <FormatString string={entry} />
                             </li>
                         )
                     })}
                     {bullets.map((entry, index) => {
                         return (
                             <li key={`bull_${index}`}>
-                                - {entry}
+                                - <FormatString string={entry} />
                             </li>
                         )
                     })}
                 </ul>
             </div>
             <div>
-                <img src={slideURL} className="img-fluid rounded-3" onClick={e => changePhoto(e)}/>
+                <img src={slideURL} className="project-img" onClick={e => changePhoto(e)}/>
             </div>
         </div>
     )

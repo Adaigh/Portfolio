@@ -13,7 +13,7 @@ export const data = {
                 ref: "#Projects"
             },
             {
-                text: "R&eacute;sum&eacute;",
+                text: "Résumé",
                 ref: "#Resume"
             },
             {
@@ -82,15 +82,16 @@ export const data = {
             message: [
                 "Here you can see some of the bigger projects I've been working on.",
                 "This page itself utilizes Vite + React and Bootstrap!",
-                "You can click the pictures to cycle through different images.",
+                "<u>You can click the pictures to cycle through different images.</u>",
                 "Remember to check back often, more projects are coming!"
             ]
         },
         projects: [
             {
                 title: {
-                    type: "text",
-                    text: "STMspokane.com (Call-To-Action)"
+                    type: "link",
+                    text: "STMspokane.com (Call-To-Action)",
+                    ref: "https://stmspokane.com/"
                 },
                 description: [
                     "Updated single-page call-to-action site for STMspokane.com",
@@ -108,9 +109,8 @@ export const data = {
             },
             {
                 title: {
-                    type: "link",
+                    type: "text",
                     text: "STMspokane.com (MERN)",
-                    ref: "https://stmspokane.com/"
                 },
                 description: [
                     "Mobile-responsive web application with scheduling services and automated email notifications.",
@@ -189,7 +189,7 @@ export const data = {
 
     resume: {
         header: {
-            title: "R&eacute;sum&eacute;",
+            title: "Résumé",
             message: [
                 "Here are my educational accomplishments and recent employers.",
                 "For further information, please contact me via email (see bottom)."
@@ -246,7 +246,7 @@ export const data = {
         header: {
             title: "Contact Information",
             message: [
-                "I'm currently located in Spokane, WA but am willing to relocate.",
+                "I'm currently located in Spokane, WA.",
                 "Please feel free to check out my links!"
             ]
         },
