@@ -94,14 +94,16 @@ export const data = {
                     ref: "https://stmspokane.com/"
                 },
                 description: [
-                    "Updated single-page call-to-action site for STMspokane.com",
-                    "Refining the stm page to reduce scope and increase conversion rate"
+                    "Updated single-page call-to-action site for STMspokane.com.",
+                    "Refining STM Tuning's website to reduce scope and potentially increase conversion rate."
                 ],
                 bullets: [
                     "Vite (React/TS) using Bootstrap styling",
-                    "Optimized for SEO",
-                    "AWS S3 planned deployment",
-                    "DNS service by AWS Route 53"
+                    "Hosted on AWS using Amplify, S3, and Route 53",
+                    "Improved SEO",
+                    "Additional accessibility features",
+                    "Focused experience for customers",
+                    "Reduced employee workload"
                 ],
                 slides: [
                     './stm_2025_1.webp', './stm_2025_2.webp', './stm_2025_3.webp'
