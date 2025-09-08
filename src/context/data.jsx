@@ -40,7 +40,7 @@ export const data = {
             }
         ],
         img: {
-            ref: "./profilepic.jpg",
+            ref: "./profilepic.webp",
             altText: "Portrait photo of Alexander D."
         }
     },
@@ -103,7 +103,7 @@ export const data = {
                     "DNS service by AWS Route 53"
                 ],
                 slides: [
-                    './stm_2025_1.jpg', './stm_2025_2.jpg', './stm_2025_3.jpg'
+                    './stm_2025_1.webp', './stm_2025_2.webp', './stm_2025_3.webp'
                 ],
             },
             {
@@ -124,7 +124,7 @@ export const data = {
                     "DNS service hosted on AWS Route 53"
                 ],
                 slides: [
-                    './stmspa_1.jpg', './stmspa_2.jpg', './stmspa_3.jpg'
+                    './stmspa_1.webp', './stmspa_2.webp', './stmspa_3.webp'
                 ],
             },
             {
@@ -142,7 +142,7 @@ export const data = {
                     "Deployed via AWS S3 and Route 53"
                 ],
                 slides: [
-                    "./stmspokane_1.jpg", "./stmspokane_2.jpg", "./stmspokane_3.jpg"
+                    "./stmspokane_1.webp", "./stmspokane_2.webp", "./stmspokane_3.webp"
                 ],
             },
             {
@@ -162,7 +162,7 @@ export const data = {
                     "MongoDB"
                 ],
                 slides: [
-                    "./PON_HA_1.jpg", "./PON_HA_2.jpg"
+                    "./PON_HA_1.webp", "./PON_HA_2.webp"
                 ],
             },
             {
@@ -181,7 +181,7 @@ export const data = {
                     "Visual Basic for Applications (VBA)"
                 ],
                 slides: [
-                    "./EPM_1.jpg", "./EPM_2.jpg"
+                    "./EPM_1.webp", "./EPM_2.webp"
                 ],
             },
         ],
