@@ -90,6 +90,12 @@ li {
     }
 }
 
+.project-img {
+    @extend .img-fluid;
+    @extend .rounded-3;
+    cursor: pointer;
+}
+
 .red-text {
     color: $red;
 }
@@ -100,6 +106,9 @@ li {
     font-weight: 700;
     letter-spacing: .5rem;
     word-spacing: 1rem;
+}
+.underline {
+    text-decoration: underline;
 }
 
 .vertical-separator {
