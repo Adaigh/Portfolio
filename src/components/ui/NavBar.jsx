@@ -22,7 +22,9 @@ const NavBar = () => {
                                 navigation.links.map((entry, index) => {
                                     return (
                                         <li className="nav-item" key={index}>
-                                            <a className="nav-link" href={entry.ref} dangerouslySetInnerHTML={{__html: entry.text}} />
+                                            <a className="nav-link" href={entry.ref} >
+                                                {entry.text}
+                                            </a>
                                         </li>
                                     )
                                 })

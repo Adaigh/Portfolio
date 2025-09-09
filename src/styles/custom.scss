@@ -15,6 +15,7 @@ body {
     text-shadow: #FFF 1px 1px 2px, #FFF 1px 1px 2px;
     font-size: 1.2rem;
     font-weight: 600;
+    width: 100%;
 }
 
 ul {
@@ -106,7 +107,9 @@ li {
     font-weight: 700;
     letter-spacing: .5rem;
     word-spacing: 1rem;
+    scroll-padding-top: 50vh;
 }
+
 .underline {
     text-decoration: underline;
 }
@@ -136,6 +139,17 @@ li {
     z-index: $zindex-fixed;
 }
 
+.nav-item {
+    @extend .my-0;
+}
+
+.nav-link {
+    @extend .py-0;
+}
+
+.nav-link:hover {
+    text-decoration: underline;
+}
 
 @include media-breakpoint-down(lg) {
     body {
@@ -144,6 +158,7 @@ li {
 
     .banner {
         font-size: 0.8rem;
+        scroll-margin-top: 100px;
     }
 
     .bold-header,
@@ -191,7 +206,6 @@ li {
 
 .custom-reactive-navbar-list {
     @extend .navbar-nav;
-    @extend .nav-underline;
     @extend .me-auto;
     @extend .my-2;
     @extend .my-md-0;
