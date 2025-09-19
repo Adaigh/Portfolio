@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react"
 import FormatString from "./FormatString"
 
-const ProjectFrame = ({ description, bullets, slides }) => {
+const ProjectFrame = ({ description, bullets, slides, github }) => {
 
     const [slideURL, setSlideURL] = useState(slides[0])
 
@@ -30,6 +30,7 @@ const ProjectFrame = ({ description, bullets, slides }) => {
                             </li>
                         )
                     })}
+                    {github && <li>See it on <a href={github} target="_blank">GitHub</a></li>}
                 </ul>
             </div>
             <div>

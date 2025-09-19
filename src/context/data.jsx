@@ -95,7 +95,7 @@ export const data = {
                 },
                 description: [
                     "Updated single-page call-to-action site for STMspokane.com.",
-                    "Refining STM Tuning's website to reduce scope and potentially increase conversion rate."
+                    "Refining STM Tuning's website to reduce scope and increase conversion rate."
                 ],
                 bullets: [
                     "Vite (React/TS) using Bootstrap styling",
@@ -105,6 +105,7 @@ export const data = {
                     "Focused experience for customers",
                     "Reduced employee workload"
                 ],
+                github: "https://github.com/Adaigh/stm_2025",
                 slides: [
                     './stm_2025_1.webp', './stm_2025_2.webp', './stm_2025_3.webp'
                 ],
@@ -125,6 +126,7 @@ export const data = {
                     "Deployed on AWS EC2",
                     "DNS service hosted on AWS Route 53"
                 ],
+                github: "https://github.com/Adaigh/stm_SPA",
                 slides: [
                     './stmspa_1.webp', './stmspa_2.webp', './stmspa_3.webp'
                 ],
@@ -143,6 +145,7 @@ export const data = {
                     "HTML, CSS, and JavaScript",
                     "Deployed via AWS S3 and Route 53"
                 ],
+                github: "https://github.com/Adaigh/STMtuning",
                 slides: [
                     "./stmspokane_1.webp", "./stmspokane_2.webp", "./stmspokane_3.webp"
                 ],

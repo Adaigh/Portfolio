@@ -1,6 +1,6 @@
 # Portfolio page using Vite + ReactJS and Bootstrap CSS
 
-**Version 1.1.8** - Sept 09, 2025
+**Version 1.1.9** - Sept 09, 2025
 
 This is a live project to display other programming projects I've been working on.
 
